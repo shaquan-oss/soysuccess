@@ -74,5 +74,16 @@ export const generatedRoutes: GeneratedRoute[] = [
       constant: true,
       hideInMenu: true
     }
+  },
+  {
+    name: 'theme-showcase',
+    path: '/theme-showcase',
+    component: 'layout.base$view.theme-showcase',
+    meta: {
+      title: 'theme-showcase',
+      i18nKey: 'route.theme-showcase',
+      icon: 'mdi:palette-swatch',
+      order: 2
+    }
   }
 ];

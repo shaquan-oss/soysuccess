@@ -108,6 +108,10 @@ const local: App.I18n.Schema = {
         azir: {
           name: 'Azir的预设',
           desc: '是 Azir 比较喜欢的莫兰迪色系冷淡风'
+        },
+        cornex: {
+          name: 'Cornex 楚能',
+          desc: '与默认预设相同，仅替换楚能品牌色'
         }
       }
     },
@@ -225,7 +229,8 @@ const local: App.I18n.Schema = {
     404: '页面不存在',
     500: '服务器错误',
     'iframe-page': '外链页面',
-    home: '首页'
+    home: '首页',
+    'theme-showcase': '主题展示'
   },
   page: {
     login: {
@@ -302,6 +307,51 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean 刚才把工作台页面随便写了一些，凑合能看了！'
       },
       creativity: '创意'
+    },
+    themeShowcase: {
+      title: '楚能 Cornex 设计系统',
+      subtitle: '能源管理系统 · 品牌配色与 cn-* UnoCSS 组件样式展示',
+      semanticColors: '语义色（跟随主题动态变化）',
+      blueScale: '楚能蓝 · 标准色阶',
+      greenScale: '楚能绿 · 标准色阶',
+      auxColors: '辅助色',
+      buttonVariants: '按钮样式',
+      buttonHint: '在 Naive UI 组件上添加 cn-* UnoCSS shortcut class 即可应用楚能工业风格',
+      deviceStatusTags: '设备状态标签（电芯行业语义）',
+      tagHint: '适用于 BMS / PCS / 产线设备状态展示',
+      alerts: '提示 Alert',
+      inputs: '输入 Input / Select',
+      progress: '进度 Progress / Badge / Switch',
+      modal: '弹窗 Modal / Dialog',
+      table: '表格 DataTable',
+      pageLayout: {
+        pageHeader: '页头 cn-page-header',
+        pageHeaderHint: '列表页/详情页顶部：左侧标题 + 右侧操作区',
+        toolbar: '筛选栏 cn-toolbar',
+        toolbarHint: '表格上方：搜索、下拉筛选、查询/重置按钮',
+        statRow: '指标行 cn-stat-row',
+        statRowHint: 'Dashboard 顶部 KPI 卡片区，响应式 1→2→4 列，配合 cn-card-metric',
+        kvGrid: '参数网格 cn-kv-grid',
+        kvGridHint: '设备详情、监测面板：label + value 键值对，value 使用等宽字体',
+        statusDot: '状态圆点 cn-status-dot',
+        statusDotHint: '列表/详情中的运行、告警、离线状态指示，比 Tag 更轻量',
+        sectionTitle: '区块标题 cn-section-title',
+        sectionTitleHint: '表单分组、图表区、卡片内的小标题，带品牌色竖线',
+        chartWrap: '图表容器 cn-chart-wrap',
+        chartWrapHint: 'ECharts 挂载区域，固定最小高度 360px',
+        empty: '空状态 cn-empty',
+        emptyHint: '无数据、无告警、搜索无结果时的占位区域',
+        fullPage: '完整页面组合 cn-page',
+        fullPageHint: '将以上 layout class 组合使用的典型业务页结构'
+      },
+      tabs: {
+        colors: '品牌配色',
+        buttons: '按钮',
+        tags: '标签',
+        feedback: '表单反馈',
+        layout: '卡片弹窗',
+        pageLayout: '页面布局'
+      }
     }
   },
   form: {

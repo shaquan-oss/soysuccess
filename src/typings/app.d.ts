@@ -555,6 +555,51 @@ declare namespace App {
           };
           creativity: string;
         };
+        themeShowcase: {
+          title: string;
+          subtitle: string;
+          semanticColors: string;
+          blueScale: string;
+          greenScale: string;
+          auxColors: string;
+          buttonVariants: string;
+          buttonHint: string;
+          deviceStatusTags: string;
+          tagHint: string;
+          alerts: string;
+          inputs: string;
+          progress: string;
+          modal: string;
+          table: string;
+          pageLayout: {
+            pageHeader: string;
+            pageHeaderHint: string;
+            toolbar: string;
+            toolbarHint: string;
+            statRow: string;
+            statRowHint: string;
+            kvGrid: string;
+            kvGridHint: string;
+            statusDot: string;
+            statusDotHint: string;
+            sectionTitle: string;
+            sectionTitleHint: string;
+            chartWrap: string;
+            chartWrapHint: string;
+            empty: string;
+            emptyHint: string;
+            fullPage: string;
+            fullPageHint: string;
+          };
+          tabs: {
+            colors: string;
+            buttons: string;
+            tags: string;
+            feedback: string;
+            layout: string;
+            pageLayout: string;
+          };
+        };
       };
       form: {
         required: string;

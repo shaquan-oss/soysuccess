@@ -102,8 +102,10 @@ const applyPreset = (preset: ThemePreset): void => {
     tokens: { ...rest.tokens }
   });
 
-  // Apply NaiveUI theme overrides if present
-  themeStore.setNaiveThemeOverrides(naiveui);
+  // Apply NaiveUI theme overrides if present in preset
+  if (naiveui) {
+    themeStore.setNaiveThemeOverrides(naiveui);
+  }
 
   window.$message?.success($t('theme.appearance.preset.applySuccess'));
 };

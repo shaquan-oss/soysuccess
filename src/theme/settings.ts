@@ -4,11 +4,11 @@ export const themeSettings: App.Theme.ThemeSetting = {
   grayscale: false,
   colourWeakness: false,
   recommendColor: false,
-  themeColor: '#646cff',
+  themeColor: '#0028AA',
   themeRadius: 6,
   otherColor: {
-    info: '#2080f0',
-    success: '#52c41a',
+    info: '#015286',
+    success: '#03a53d',
     warning: '#faad14',
     error: '#f5222d'
   },
@@ -59,7 +59,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
   },
   watermark: {
     visible: false,
-    text: 'SoybeanAdmin',
+    text: '楚能能源',
     enableUserName: false,
     enableTime: false,
     timeFormat: 'YYYY-MM-DD HH:mm'

@@ -6,6 +6,7 @@ import { getPaletteColorByNumber } from '@sa/color';
 import { localStg } from '@/utils/storage';
 import { SetupStoreId } from '@/enum';
 import { useAuthStore } from '../auth';
+import { chunengNaiveOverrides } from '@/theme/naive-chuneng';
 import {
   addThemeVarsToGlobal,
   createThemeToken,
@@ -25,7 +26,7 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
   const settings: Ref<App.Theme.ThemeSetting> = ref(initThemeSettings());
 
   /** Optional NaiveUI theme overrides from preset */
-  const naiveThemeOverrides: Ref<App.Theme.NaiveUIThemeOverride | undefined> = ref(undefined);
+  const naiveThemeOverrides: Ref<App.Theme.NaiveUIThemeOverride | undefined> = ref(chunengNaiveOverrides);
 
   /** Watermark time instance with controls */
   const { now: watermarkTime, pause: pauseWatermarkTime, resume: resumeWatermarkTime } = useNow({ controls: true });

@@ -108,6 +108,10 @@ const local: App.I18n.Schema = {
         azir: {
           name: "Azir's Preset",
           desc: 'It is a cold and elegant preset that Azir likes'
+        },
+        cornex: {
+          name: 'Cornex ChuNeng',
+          desc: 'Same as default preset, ChuNeng brand colors only'
         }
       }
     },
@@ -229,7 +233,8 @@ const local: App.I18n.Schema = {
     404: 'Page Not Found',
     500: 'Server Error',
     'iframe-page': 'Iframe',
-    home: 'Home'
+    home: 'Home',
+    'theme-showcase': 'Theme Showcase'
   },
   page: {
     login: {
@@ -306,6 +311,51 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean just wrote some of the workbench pages casually, and it was enough to see!'
       },
       creativity: 'Creativity'
+    },
+    themeShowcase: {
+      title: 'Cornex ChuNeng Design System',
+      subtitle: 'Energy Management System · Brand colors & cn-* UnoCSS component styles',
+      semanticColors: 'Semantic Colors (dynamic with theme)',
+      blueScale: 'ChuNeng Blue · Color Scale',
+      greenScale: 'ChuNeng Green · Color Scale',
+      auxColors: 'Auxiliary Colors',
+      buttonVariants: 'Button Styles',
+      buttonHint: 'Add cn-* UnoCSS shortcut class to Naive UI components to apply industrial style',
+      deviceStatusTags: 'Device Status Tags (Battery Industry)',
+      tagHint: 'For BMS / PCS / production line device status',
+      alerts: 'Alert',
+      inputs: 'Input / Select',
+      progress: 'Progress / Badge / Switch',
+      modal: 'Modal / Dialog',
+      table: 'DataTable',
+      pageLayout: {
+        pageHeader: 'Page Header cn-page-header',
+        pageHeaderHint: 'Top of list/detail page: title on left, actions on right',
+        toolbar: 'Filter Bar cn-toolbar',
+        toolbarHint: 'Above table: search, filters, query/reset buttons',
+        statRow: 'KPI Row cn-stat-row',
+        statRowHint: 'Dashboard top metrics, responsive 1→2→4 cols, use with cn-card-metric',
+        kvGrid: 'KV Grid cn-kv-grid',
+        kvGridHint: 'Device detail panel: label + value pairs, monospace values for numbers',
+        statusDot: 'Status Dot cn-status-dot',
+        statusDotHint: 'Lightweight running/alarm/offline indicator in lists or detail',
+        sectionTitle: 'Section Title cn-section-title',
+        sectionTitleHint: 'Sub-headings in forms, charts, cards with brand accent bar',
+        chartWrap: 'Chart Container cn-chart-wrap',
+        chartWrapHint: 'ECharts mount area with min-height 360px',
+        empty: 'Empty State cn-empty',
+        emptyHint: 'Placeholder when no data, no alerts, or no search results',
+        fullPage: 'Full Page cn-page',
+        fullPageHint: 'Typical business page combining all layout classes above'
+      },
+      tabs: {
+        colors: 'Colors',
+        buttons: 'Buttons',
+        tags: 'Tags',
+        feedback: 'Feedback',
+        layout: 'Cards & Modal',
+        pageLayout: 'Page Layout'
+      }
     }
   },
   form: {
