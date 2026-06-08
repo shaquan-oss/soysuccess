@@ -578,6 +578,9 @@ declare namespace App {
           tagHint: string;
           alerts: string;
           inputs: string;
+          formHint: string;
+          pagination: string;
+          checkboxSwitch: string;
           progress: string;
           modal: string;
           table: string;

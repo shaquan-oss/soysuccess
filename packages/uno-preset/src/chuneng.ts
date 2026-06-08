@@ -187,11 +187,15 @@ const chunengShortcuts: Record<string, string> = {
     'cn-card border-cn-blue-100/20 bg-cn-bg [&_.n-card-header__main]:text-cn-blue-100 [&_.n-card-header__main]:font-600',
   'cn-card-metric': 'cn-card !border-l-3 !border-l-cn-blue-100 !rd-l-0 !rd-r-6px',
 
-  // ---------- 弹窗 Modal ----------
+  // ---------- 弹窗 Modal / Dialog ----------
   'cn-modal':
-    '[&_.n-card]:border [&_.n-card]:border-cn-border [&_.n-card]:shadow-[0_8px_24px_rgba(0,40,170,0.12)] [&_.n-card-header]:border-b [&_.n-card-header]:border-cn-border [&_.n-card-header]:pb-12px [&_.n-card-header__main]:text-cn-blue-100 [&_.n-card-header__main]:font-600',
+    '[&_.n-card]:border [&_.n-card]:border-cn-border [&_.n-card]:shadow-[0_8px_24px_rgba(0,40,170,0.12)] [&_.n-card-header]:border-b [&_.n-card-header]:border-cn-border [&_.n-card-header]:pb-12px [&_.n-card-header__main]:text-cn-blue-100 [&_.n-card-header__main]:font-600 [&_.n-dialog__title]:text-cn-blue-100 [&_.n-dialog__title]:font-600 [&_.n-button--primary-type]:!bg-cn-blue-100 [&_.n-button--primary-type]:!border-cn-blue-100 [&_.n-button--primary-type]:!text-white hover:[&_.n-button--primary-type]:!bg-cn-blue-hover active:[&_.n-button--primary-type]:!bg-cn-blue-pressed',
 
-  // ---------- 提示 Alert ----------
+  // ---------- 输入 Input / Select（设计稿：聚焦主题蓝边框） ----------
+  'cn-input':
+    'transition-shadow duration-200 [&_.n-input]:border-cn-border [&_.n-input:not(.n-input--disabled):hover]:border-cn-blue-hover [&_.n-input.n-input--focus]:border-cn-blue-100 [&_.n-input.n-input--focus]:shadow-[0_0_0_2px_rgba(0,40,170,0.12)] [&_.n-base-selection]:border-cn-border [&_.n-base-selection:not(.n-base-selection--disabled):hover]:border-cn-blue-hover [&_.n-base-selection.n-base-selection--active]:border-cn-blue-100 [&_.n-base-selection.n-base-selection--focus]:border-cn-blue-100 [&_.n-base-selection.n-base-selection--focus]:shadow-[0_0_0_2px_rgba(0,40,170,0.12)]',
+  'cn-input-industrial': 'cn-input [&_.n-input]:bg-cn-bg [&_.n-input]:font-mono',
+  'cn-select': 'cn-input',
   'cn-alert': 'border border-transparent',
   'cn-alert-info': 'cn-alert !border-cn-info/25 !bg-cn-info/6',
   'cn-alert-success': 'cn-alert !border-cn-success/25 !bg-cn-success/6',
@@ -200,12 +204,7 @@ const chunengShortcuts: Record<string, string> = {
   'cn-alert-industrial':
     'cn-alert !border-l-4 !border-l-cn-blue-100 !border-y-transparent !border-r-transparent !bg-cn-bg font-mono cn-text-base',
 
-  // ---------- 输入 Input ----------
-  'cn-input':
-    'transition-shadow duration-200 [&_.n-input]:border-cn-border [&_.n-input:not(.n-input--disabled):hover]:border-cn-blue-hover [&_.n-input.n-input--focus]:border-cn-blue-100 [&_.n-input.n-input--focus]:shadow-[0_0_0_2px_rgba(0,40,170,0.12)]',
-  'cn-input-industrial': 'cn-input [&_.n-input]:bg-cn-bg [&_.n-input]:font-mono',
-
-  // ---------- 表格 DataTable ----------
+  // ---------- 提示 Alert ----------
   'cn-table':
     '[&_.n-data-table]:border [&_.n-data-table]:border-cn-border [&_.n-data-table]:cn-rd-md [&_.n-data-table]:overflow-hidden [&_.n-data-table-th]:!bg-cn-bg [&_.n-data-table-th]:text-cn-text-secondary [&_.n-data-table-th]:font-600 [&_.n-data-table-th]:cn-text-sm [&_.n-data-table-tr:not(.n-data-table-tr--summary):hover_.n-data-table-td]:!bg-cn-hover',
 

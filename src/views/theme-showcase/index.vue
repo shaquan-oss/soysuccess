@@ -19,6 +19,11 @@ const showModal = ref(false);
 const showDialog = ref(false);
 const inputValue = ref('');
 const selectValue = ref<string | null>(null);
+const formCompany = ref('');
+const errorInputValue = ref('');
+const paginationPage = ref(1);
+const checkboxValues = ref(['opt1']);
+const switchEnabled = ref(true);
 const activeTab = ref('colors');
 
 const selectOptions = [
@@ -472,19 +477,30 @@ const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
             <NGi>
               <NCard :bordered="false" class="cn-card card-wrapper">
                 <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.inputs') }}</div>
-                <NSpace vertical :size="12">
-                  <NInput v-model:value="inputValue" class="cn-input" placeholder="标准输入框" />
-                  <NInput
-                    v-model:value="inputValue"
-                    class="cn-input cn-input-industrial"
-                    placeholder="工业风格输入框"
-                  />
-                  <NSelect
-                    v-model:value="selectValue"
-                    class="cn-input"
-                    :options="selectOptions"
-                    placeholder="选择产线"
-                  />
+                <p class="cn-text-sm mb-16px">{{ $t('page.themeShowcase.formHint') }}</p>
+                <NSpace vertical :size="16">
+                  <NFormItem label="公司名称" label-placement="top">
+                    <NInput v-model:value="formCompany" class="cn-input" placeholder="请输入公司名称" />
+                  </NFormItem>
+                  <NFormItem label="产线选择" label-placement="top">
+                    <NSelect
+                      v-model:value="selectValue"
+                      class="cn-select"
+                      :options="selectOptions"
+                      placeholder="选择产线"
+                    />
+                  </NFormItem>
+                  <NFormItem label="输入中（聚焦态）" label-placement="top">
+                    <NInput v-model:value="inputValue" class="cn-input" placeholder="聚焦时显示主题蓝边框" />
+                  </NFormItem>
+                  <NFormItem label="校验失败" label-placement="top" validation-status="error" feedback="请输入有效内容">
+                    <NInput
+                      v-model:value="errorInputValue"
+                      class="cn-input"
+                      status="error"
+                      placeholder="错误态红色边框"
+                    />
+                  </NFormItem>
                 </NSpace>
               </NCard>
             </NGi>
@@ -497,18 +513,25 @@ const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
                     <NProgress type="line" :percentage="87" indicator-placement="inside" processing />
                   </div>
                   <div>
-                    <div class="cn-text-sm mb-4px">产能完成 68%</div>
-                    <NProgress type="line" :percentage="68" status="success" />
+                    <div class="cn-text-sm mb-8px">{{ $t('page.themeShowcase.pagination') }}</div>
+                    <NPagination v-model:page="paginationPage" :page-count="8" />
                   </div>
                   <div>
-                    <div class="cn-text-sm mb-4px">告警指数</div>
-                    <NProgress type="line" :percentage="35" status="warning" />
+                    <div class="cn-text-sm mb-8px">{{ $t('page.themeShowcase.checkboxSwitch') }}</div>
+                    <NSpace vertical :size="12">
+                      <NCheckboxGroup v-model:value="checkboxValues">
+                        <NSpace>
+                          <NCheckbox value="opt1" label="选中项" />
+                          <NCheckbox value="opt2" label="未选中" />
+                        </NSpace>
+                      </NCheckboxGroup>
+                      <NSwitch v-model:value="switchEnabled" />
+                    </NSpace>
                   </div>
                   <NSpace>
                     <NBadge :value="3" class="cn-badge">
                       <NButton class="cn-btn cn-btn-ghost" size="small">告警消息</NButton>
                     </NBadge>
-                    <NSwitch :default-value="true" />
                   </NSpace>
                 </NSpace>
               </NCard>
@@ -589,7 +612,7 @@ const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
             <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.toolbarHint') }}</p>
             <div class="cn-toolbar">
               <NInput class="cn-input w-200px" placeholder="设备编号 / 名称" size="small" />
-              <NSelect class="cn-input w-160px" :options="selectOptions" placeholder="产线" size="small" />
+              <NSelect class="cn-select w-160px" :options="selectOptions" placeholder="产线" size="small" />
               <NSelect
                 class="cn-input w-140px"
                 :options="[
@@ -726,7 +749,7 @@ const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
               </div>
               <div class="cn-toolbar">
                 <NInput class="cn-input w-200px" placeholder="搜索设备编号" size="small" />
-                <NSelect class="cn-input w-160px" :options="selectOptions" placeholder="产线" size="small" />
+                <NSelect class="cn-select w-160px" :options="selectOptions" placeholder="产线" size="small" />
                 <NButton class="cn-btn cn-btn-ghost" size="small">查询</NButton>
               </div>
               <div class="cn-stat-row">

@@ -336,7 +336,10 @@ const local: App.I18n.Schema = {
       tagHint: 'For BMS / PCS / production line device status',
       alerts: 'Alert',
       inputs: 'Input / Select',
-      progress: 'Progress / Badge / Switch',
+      formHint: 'Focus and selected states use primary blue #0028AA; dropdown active item is blue with white text',
+      pagination: 'Pagination',
+      checkboxSwitch: 'Checkbox / Switch',
+      progress: 'Progress / Badge',
       modal: 'Modal / Dialog',
       table: 'DataTable',
       pageLayout: {

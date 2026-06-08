@@ -309,7 +309,7 @@ function handleSubmitTicket() {
         <NInput v-model:value="keyword" class="cn-input w-180px" placeholder="设备编号 / 类型" size="small" clearable />
         <NSelect
           v-model:value="stationFilter"
-          class="cn-input w-200px"
+          class="cn-select w-200px"
           :options="stationOptions"
           placeholder="储能站"
           size="small"
@@ -317,7 +317,7 @@ function handleSubmitTicket() {
         />
         <NSelect
           v-model:value="statusFilter"
-          class="cn-input w-140px"
+          class="cn-select w-140px"
           :options="statusOptions"
           placeholder="运行状态"
           size="small"
@@ -363,12 +363,12 @@ function handleSubmitTicket() {
                 <NInput v-model:value="ticketForm.title" class="cn-input" />
               </NFormItemGi>
               <NFormItemGi label="所属储能站">
-                <NSelect v-model:value="ticketForm.station" class="cn-input" :options="stationOptions" />
+                <NSelect v-model:value="ticketForm.station" class="cn-select" :options="stationOptions" />
               </NFormItemGi>
               <NFormItemGi label="告警等级">
                 <NSelect
                   v-model:value="ticketForm.level"
-                  class="cn-input"
+                  class="cn-select"
                   :options="[
                     { label: '严重', value: 'critical' },
                     { label: '预警', value: 'warning' },
@@ -421,7 +421,7 @@ function handleSubmitTicket() {
             <NFormItem label="并网模式">
               <NSelect
                 v-model:value="pcsForm.gridMode"
-                class="cn-input"
+                class="cn-select"
                 :options="[
                   { label: '并网', value: '并网' },
                   { label: '离网', value: '离网' },

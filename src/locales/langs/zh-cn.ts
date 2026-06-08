@@ -332,7 +332,10 @@ const local: App.I18n.Schema = {
       tagHint: '适用于 BMS / PCS / 产线设备状态展示',
       alerts: '提示 Alert',
       inputs: '输入 Input / Select',
-      progress: '进度 Progress / Badge / Switch',
+      formHint: '聚焦/选中态使用主题蓝 #0028AA，下拉选中项蓝底白字，弹窗确定按钮同主色',
+      pagination: '翻页 Pagination',
+      checkboxSwitch: '复选框 / 开关',
+      progress: '进度 Progress / Badge',
       modal: '弹窗 Modal / Dialog',
       table: '表格 DataTable',
       pageLayout: {
