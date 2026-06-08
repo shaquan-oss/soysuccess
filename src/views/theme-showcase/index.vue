@@ -2,7 +2,10 @@
 import { h, ref } from 'vue';
 import type { DataTableColumns } from 'naive-ui';
 import { NTag } from 'naive-ui';
-import { chunengBlueScale, chunengGreenScale } from '@sa/uno-preset';
+import { chunengBlueScale, chunengChartPalette, chunengGeneralColors, chunengGreenScale } from '@sa/uno-preset';
+import { chunengDesignTokens } from '@/theme/design-tokens';
+import IndustrialCharts from './modules/industrial-charts.vue';
+import EmsBusinessShowcase from './modules/ems-business.vue';
 import { useThemeStore } from '@/store/modules/theme';
 import { $t } from '@/locales';
 
@@ -86,10 +89,32 @@ const semanticColors = [
 ];
 
 const auxColors = [
-  { label: '深蓝辅助', hex: '#015286' },
-  { label: '青绿辅助', hex: '#027b62' },
-  { label: '标准绿辅助', hex: '#03a53d' }
+  { label: '主色 Hover', hex: chunengDesignTokens.color.primaryHover },
+  { label: '主色 Pressed', hex: chunengDesignTokens.color.primaryPressed },
+  { label: '边框/分割线', hex: chunengDesignTokens.color.border },
+  { label: '页面背景', hex: chunengDesignTokens.color.bgPage },
+  { label: '列表悬停', hex: chunengDesignTokens.color.rowHover }
 ];
+
+const textColors = [
+  { label: '一级文字', hex: chunengDesignTokens.color.textPrimary },
+  { label: '二级文字', hex: chunengDesignTokens.color.textSecondary },
+  { label: '提示文字', hex: chunengDesignTokens.color.textHint }
+];
+
+const chartColors = chunengChartPalette.map((hex, i) => ({
+  label: `Chart ${i + 1}`,
+  hex
+}));
+
+const generalColors = chunengGeneralColors;
+
+const scrollbarDemoItems = Array.from({ length: 24 }, (_, i) => ({
+  id: i + 1,
+  name: `BMS-${String(i + 1).padStart(3, '0')}`,
+  soc: `${60 + (i % 35)}%`,
+  status: i % 5 === 0 ? '告警' : '运行中'
+}));
 
 /** KPI 指标（cn-stat-row 示例） */
 const statMetrics = [
@@ -116,6 +141,48 @@ const statusDotExamples = [
 ];
 
 const showEmptyDemo = ref(false);
+
+/** 代码片段提示框（统一设计稿边框/背景） */
+const codeHintClass =
+  'p-8px px-12px rd-4px bg-cn-bg border border-cn-border border-dashed font-mono cn-text-sm text-cn-text-hint break-all';
+
+/** 设计稿按钮交互色 */
+const buttonInteractionColors = [
+  { label: '默认 Default', hex: chunengDesignTokens.color.primary },
+  { label: 'Hover', hex: chunengDesignTokens.color.primaryHover },
+  { label: 'Pressed', hex: chunengDesignTokens.color.primaryPressed }
+];
+
+/** 设计稿圆角规范 */
+const radiusSpec = [
+  {
+    label: '大模块圆角',
+    px: chunengDesignTokens.radius.lg,
+    usage: '页面大区块、主容器',
+    shortcut: 'cn-rd-lg / cn-module-lg'
+  },
+  {
+    label: '小模块 / 弹窗 / 下拉 / 大切换',
+    px: chunengDesignTokens.radius.md,
+    usage: 'Card、Modal、Dropdown、Switch(medium+)',
+    shortcut: 'cn-rd-md'
+  },
+  {
+    label: '按钮 / 标签 / 小切换',
+    px: chunengDesignTokens.radius.sm,
+    usage: 'Button、Tag、Input、Switch(small)',
+    shortcut: 'cn-rd-sm'
+  }
+];
+
+type ButtonSize = 'small' | 'medium' | 'large';
+
+/** 设计稿按钮高度 */
+const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
+  { size: 'small', px: chunengDesignTokens.buttonHeight.small, desc: '表格内或空间紧凑的行级操作' },
+  { size: 'medium', px: chunengDesignTokens.buttonHeight.medium, desc: '主流页面级操作按钮（默认）' },
+  { size: 'large', px: chunengDesignTokens.buttonHeight.large, desc: '重点主操作或强调区域' }
+];
 </script>
 
 <template>
@@ -125,11 +192,11 @@ const showEmptyDemo = ref(false);
       <div class="flex items-center justify-between flex-wrap gap-12px">
         <div>
           <h2 class="text-20px font-600 text-primary m-0 mb-4px">{{ $t('page.themeShowcase.title') }}</h2>
-          <p class="text-13px text-gray-500 m-0">{{ $t('page.themeShowcase.subtitle') }}</p>
+          <p class="cn-text-secondary text-14px m-0">{{ $t('page.themeShowcase.subtitle') }}</p>
         </div>
         <NSpace>
           <NTag class="cn-tag cn-tag-energy" :bordered="false">Cornex 楚能</NTag>
-          <NTag class="cn-tag cn-tag-maintenance" :bordered="false">工业风格 v1.0</NTag>
+          <NTag class="cn-tag cn-tag-maintenance" :bordered="false">UI 设计稿 v2</NTag>
         </NSpace>
       </div>
     </NCard>
@@ -147,8 +214,8 @@ const showEmptyDemo = ref(false);
                     class="w-full h-48px rd-6px border border-black/6 transition-transform hover:scale-y-105"
                     :style="{ backgroundColor: item.color }"
                   />
-                  <span class="text-11px text-gray-500 font-mono">{{ item.label }}</span>
-                  <span class="text-10px text-gray-300 font-mono">{{ item.color }}</span>
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.color }}</span>
                 </div>
               </NGi>
             </NGrid>
@@ -163,8 +230,8 @@ const showEmptyDemo = ref(false);
                     class="w-full h-48px rd-6px border border-black/6 transition-transform hover:scale-y-105"
                     :style="{ backgroundColor: item.hex }"
                   />
-                  <span class="text-11px text-gray-500 font-mono">{{ item.label }}</span>
-                  <span class="text-10px text-gray-300 font-mono">{{ item.hex }}</span>
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.hex }}</span>
                 </div>
               </NGi>
             </NGrid>
@@ -179,24 +246,113 @@ const showEmptyDemo = ref(false);
                     class="w-full h-48px rd-6px border border-black/6 transition-transform hover:scale-y-105"
                     :style="{ backgroundColor: item.hex }"
                   />
-                  <span class="text-11px text-gray-500 font-mono">{{ item.label }}</span>
-                  <span class="text-10px text-gray-300 font-mono">{{ item.hex }}</span>
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.hex }}</span>
                 </div>
               </NGi>
             </NGrid>
           </NCard>
 
           <NCard :bordered="false" class="cn-card card-wrapper">
-            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.auxColors') }}</div>
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.textColors') }}</div>
             <NGrid cols="3" :x-gap="12" responsive="screen">
+              <NGi v-for="item in textColors" :key="item.hex">
+                <div class="flex flex-col items-center gap-6px">
+                  <div
+                    class="w-full h-48px rd-6px border border-cn-border flex items-center justify-center"
+                    :style="{ color: item.hex }"
+                  >
+                    Aa 文字
+                  </div>
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.hex }}</span>
+                </div>
+              </NGi>
+            </NGrid>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.typography') }}</div>
+            <NSpace vertical :size="12">
+              <div class="cn-text-xl">特大标题 24px / 36px</div>
+              <div class="cn-text-lg">文章标题 20px / 30px</div>
+              <div class="cn-text-md">小标题 / 按钮 / 表头 16px / 24px</div>
+              <div class="cn-text-base">正文 / 表单 / 列表 14px / 20px</div>
+              <div class="cn-text-sm">次要信息 / 辅助说明 12px / 18px</div>
+            </NSpace>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.auxColors') }}</div>
+            <NGrid cols="2 s:3 m:5" :x-gap="12" :y-gap="12" responsive="screen">
               <NGi v-for="item in auxColors" :key="item.hex">
                 <div class="flex flex-col items-center gap-6px">
                   <div
                     class="w-full h-48px rd-6px border border-black/6 transition-transform hover:scale-y-105"
                     :style="{ backgroundColor: item.hex }"
                   />
-                  <span class="text-11px text-gray-500 font-mono">{{ item.label }}</span>
-                  <span class="text-10px text-gray-300 font-mono">{{ item.hex }}</span>
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.hex }}</span>
+                </div>
+              </NGi>
+            </NGrid>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.chartColors') }}</div>
+            <NGrid cols="3 s:5 m:9" :x-gap="8" :y-gap="8" responsive="screen">
+              <NGi v-for="item in chartColors" :key="item.hex">
+                <div class="flex flex-col items-center gap-6px">
+                  <div class="w-full h-40px rd-4px border border-cn-border" :style="{ backgroundColor: item.hex }" />
+                  <span class="cn-text-sm font-mono text-cn-text-hint">{{ item.label }}</span>
+                </div>
+              </NGi>
+            </NGrid>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.controls.radius') }}</div>
+            <p class="cn-text-sm mb-16px">{{ $t('page.themeShowcase.controls.radiusHint') }}</p>
+            <div class="flex flex-wrap gap-24px mb-16px">
+              <div v-for="item in radiusSpec" :key="item.px" class="flex flex-col items-center gap-8px">
+                <div class="size-80px bg-cn-blue-100" :style="{ borderRadius: `${item.px}px` }" />
+                <div class="text-center">
+                  <div class="cn-text-base font-600">{{ item.px }}px</div>
+                  <div class="cn-text-sm">{{ item.label }}</div>
+                  <div class="font-mono text-10px text-cn-text-hint mt-4px">{{ item.shortcut }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 m:grid-cols-3 gap-12px">
+              <div v-for="item in radiusSpec" :key="item.usage" class="cn-industrial-panel">
+                <div class="cn-text-sm mb-4px">{{ item.label }}</div>
+                <div class="cn-text-secondary text-14px">{{ item.usage }}</div>
+              </div>
+            </div>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.controls.buttonHeight') }}</div>
+            <p class="cn-text-sm mb-16px">{{ $t('page.themeShowcase.controls.buttonHeightHint') }}</p>
+            <div class="flex flex-wrap items-end gap-24px mb-16px">
+              <div v-for="item in buttonHeightSpec" :key="item.size" class="flex flex-col items-center gap-8px">
+                <NButton class="cn-btn cn-btn-primary" type="primary" :size="item.size">{{ item.px }}px</NButton>
+                <div class="text-center">
+                  <div class="cn-text-sm font-mono">{{ item.size }} · {{ item.px }}px</div>
+                  <div class="cn-text-sm max-w-160px">{{ item.desc }}</div>
+                </div>
+              </div>
+            </div>
+          </NCard>
+
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.generalColors') }}</div>
+            <NGrid cols="2 s:3 m:5" :x-gap="12" :y-gap="12" responsive="screen">
+              <NGi v-for="item in generalColors" :key="item.hex">
+                <div class="flex flex-col items-center gap-6px">
+                  <div class="w-full h-48px rd-6px border border-black/6" :style="{ backgroundColor: item.hex }" />
+                  <span class="cn-text-sm font-mono text-cn-text-secondary">{{ item.label }}</span>
+                  <span class="font-mono text-10px text-cn-text-hint">{{ item.hex }}</span>
                 </div>
               </NGi>
             </NGrid>
@@ -208,27 +364,38 @@ const showEmptyDemo = ref(false);
       <NTabPane name="buttons" :tab="$t('page.themeShowcase.tabs.buttons')">
         <NCard :bordered="false" class="cn-card card-wrapper">
           <div class="cn-section-title mb-12px">{{ $t('page.themeShowcase.buttonVariants') }}</div>
-          <p class="text-12px text-gray-400 mb-16px">{{ $t('page.themeShowcase.buttonHint') }}</p>
+          <p class="cn-text-sm mb-16px">{{ $t('page.themeShowcase.buttonHint') }}</p>
 
           <NSpace vertical :size="20">
             <div>
-              <div class="text-13px text-gray-500 mb-8px">主要操作</div>
+              <div class="cn-text-secondary text-14px mb-8px">设计稿 · 主按钮交互色（cn-btn-primary 自动应用）</div>
+              <div class="flex flex-wrap gap-16px mb-12px">
+                <div v-for="item in buttonInteractionColors" :key="item.label" class="flex items-center gap-8px">
+                  <div class="size-32px rd-4px border border-cn-border" :style="{ backgroundColor: item.hex }" />
+                  <div>
+                    <div class="cn-text-sm">{{ item.label }}</div>
+                    <div class="font-mono text-11px text-cn-text-hint">{{ item.hex }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="cn-text-secondary text-14px mb-8px">主要操作</div>
               <div class="flex flex-wrap items-center gap-12px">
                 <NButton class="cn-btn cn-btn-primary" type="primary">主要按钮</NButton>
-                <NButton class="cn-btn cn-btn-accent" type="primary">能源强调</NButton>
+                <NButton class="cn-btn cn-btn-accent" type="success">能源强调</NButton>
                 <NButton class="cn-btn cn-btn-success" type="success">成功操作</NButton>
                 <NButton class="cn-btn cn-btn-danger" type="error">危险操作</NButton>
                 <NButton class="cn-btn cn-btn-warning" type="warning">警告操作</NButton>
               </div>
-              <div
-                class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-8px"
-              >
+              <div class="mt-8px" :class="[codeHintClass]">
                 &lt;NButton class="cn-btn cn-btn-primary" type="primary"&gt;
               </div>
             </div>
 
             <div>
-              <div class="text-13px text-gray-500 mb-8px">次要 / 工业风格</div>
+              <div class="cn-text-secondary text-14px mb-8px">次要 / 工业风格</div>
               <div class="flex flex-wrap items-center gap-12px">
                 <NButton class="cn-btn cn-btn-ghost">幽灵按钮</NButton>
                 <NButton class="cn-btn cn-btn-industrial">INDUSTRIAL-01</NButton>
@@ -239,11 +406,16 @@ const showEmptyDemo = ref(false);
             </div>
 
             <div>
-              <div class="text-13px text-gray-500 mb-8px">尺寸</div>
-              <div class="flex flex-wrap items-center gap-12px">
-                <NButton class="cn-btn cn-btn-primary" type="primary" size="small">Small</NButton>
-                <NButton class="cn-btn cn-btn-primary" type="primary" size="medium">Medium</NButton>
-                <NButton class="cn-btn cn-btn-primary" type="primary" size="large">Large</NButton>
+              <div class="cn-text-secondary text-14px mb-8px">
+                尺寸（设计稿：Small 32px / Medium 36px / Large 48px）
+              </div>
+              <div class="flex flex-wrap items-end gap-16px">
+                <div v-for="item in buttonHeightSpec" :key="item.size" class="flex flex-col items-center gap-6px">
+                  <NButton class="cn-btn cn-btn-primary" type="primary" :size="item.size">
+                    {{ item.size === 'small' ? 'Small' : item.size === 'medium' ? 'Medium' : 'Large' }}
+                  </NButton>
+                  <span class="cn-text-sm font-mono">{{ item.px }}px</span>
+                </div>
               </div>
             </div>
           </NSpace>
@@ -254,7 +426,9 @@ const showEmptyDemo = ref(false);
       <NTabPane name="tags" :tab="$t('page.themeShowcase.tabs.tags')">
         <NCard :bordered="false" class="cn-card card-wrapper">
           <div class="cn-section-title mb-12px">{{ $t('page.themeShowcase.deviceStatusTags') }}</div>
-          <p class="text-12px text-gray-400 mb-16px">{{ $t('page.themeShowcase.tagHint') }}</p>
+          <p class="cn-text-sm mb-16px">
+            {{ $t('page.themeShowcase.tagHint') }} · 运行中/成功态使用设计稿青色 #2CCFDC（cn-tag-running）
+          </p>
           <div class="flex flex-wrap items-center gap-12px">
             <NTag class="cn-tag cn-tag-running" :bordered="false">运行中</NTag>
             <NTag class="cn-tag cn-tag-charging" :bordered="false">充电中</NTag>
@@ -264,9 +438,7 @@ const showEmptyDemo = ref(false);
             <NTag class="cn-tag cn-tag-maintenance" :bordered="false">维护中</NTag>
             <NTag class="cn-tag cn-tag-energy" :bordered="false">能源正常</NTag>
           </div>
-          <div
-            class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-          >
+          <div class="mt-12px" :class="[codeHintClass]">
             &lt;NTag class="cn-tag cn-tag-running" :bordered="false"&gt;运行中&lt;/NTag&gt;
           </div>
         </NCard>
@@ -321,15 +493,15 @@ const showEmptyDemo = ref(false);
                 <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.progress') }}</div>
                 <NSpace vertical :size="16">
                   <div>
-                    <div class="text-12px text-gray-500 mb-4px">SOC 87%</div>
+                    <div class="cn-text-sm mb-4px">SOC 87%</div>
                     <NProgress type="line" :percentage="87" indicator-placement="inside" processing />
                   </div>
                   <div>
-                    <div class="text-12px text-gray-500 mb-4px">产能完成 68%</div>
+                    <div class="cn-text-sm mb-4px">产能完成 68%</div>
                     <NProgress type="line" :percentage="68" status="success" />
                   </div>
                   <div>
-                    <div class="text-12px text-gray-500 mb-4px">告警指数</div>
+                    <div class="cn-text-sm mb-4px">告警指数</div>
                     <NProgress type="line" :percentage="35" status="warning" />
                   </div>
                   <NSpace>
@@ -351,18 +523,18 @@ const showEmptyDemo = ref(false);
           <NGrid cols="1 s:3" :x-gap="16" :y-gap="16" responsive="screen">
             <NGi>
               <NCard title="标准卡片" class="cn-card card-wrapper" :bordered="false">
-                <p class="text-13px text-gray-500 m-0">class="cn-card"</p>
+                <p class="cn-text-secondary text-14px m-0">class="cn-card"</p>
               </NCard>
             </NGi>
             <NGi>
               <NCard title="高亮卡片" class="cn-card cn-card-highlight card-wrapper" :bordered="false">
-                <p class="text-13px text-gray-500 m-0">class="cn-card cn-card-highlight"</p>
+                <p class="cn-text-secondary text-14px m-0">class="cn-card cn-card-highlight"</p>
               </NCard>
             </NGi>
             <NGi>
               <NCard title="指标卡片" class="cn-card cn-card-metric card-wrapper" :bordered="false">
-                <div class="text-24px font-600 text-primary">12,580</div>
-                <div class="text-12px text-gray-400">今日产量 (PCS)</div>
+                <div class="cn-text-xl text-primary font-mono">12,580</div>
+                <div class="cn-text-sm">今日产量 (PCS)</div>
               </NCard>
             </NGi>
           </NGrid>
@@ -378,11 +550,7 @@ const showEmptyDemo = ref(false);
           <NCard :bordered="false" class="cn-card card-wrapper cn-table">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.table') }}</div>
             <NDataTable :columns="columns" :data="tableData" :bordered="false" size="small" />
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
-              外层容器添加 class="cn-table"
-            </div>
+            <div class="mt-12px" :class="[codeHintClass]">外层容器添加 class="cn-table"</div>
           </NCard>
         </NSpace>
       </NTabPane>
@@ -393,8 +561,8 @@ const showEmptyDemo = ref(false);
           <!-- cn-page-header -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.pageHeader') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.pageHeaderHint') }}</p>
-            <div class="cn-page-header p-12px rd-8px bg-primary/2 border border-primary/10">
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.pageHeaderHint') }}</p>
+            <div class="cn-page-header cn-industrial-panel">
               <div>
                 <h2 class="cn-page-title">储能站总览</h2>
                 <p class="cn-page-desc">湖北基地 · 1 号储能柜 · 最后更新 10:32:05</p>
@@ -404,9 +572,7 @@ const showEmptyDemo = ref(false);
                 <NButton class="cn-btn cn-btn-primary" type="primary" size="small">导出报表</NButton>
               </NSpace>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;div class="cn-page-header"&gt;
               <br />
               &nbsp;&nbsp;&lt;h2 class="cn-page-title"&gt;...&lt;/h2&gt;
@@ -420,7 +586,7 @@ const showEmptyDemo = ref(false);
           <!-- cn-toolbar -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.toolbar') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.toolbarHint') }}</p>
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.toolbarHint') }}</p>
             <div class="cn-toolbar">
               <NInput class="cn-input w-200px" placeholder="设备编号 / 名称" size="small" />
               <NSelect class="cn-input w-160px" :options="selectOptions" placeholder="产线" size="small" />
@@ -437,17 +603,13 @@ const showEmptyDemo = ref(false);
               <NButton class="cn-btn cn-btn-ghost" size="small">重置</NButton>
               <NButton class="cn-btn cn-btn-primary" type="primary" size="small">查询</NButton>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
-              &lt;div class="cn-toolbar"&gt;...筛选控件...&lt;/div&gt;
-            </div>
+            <div class="mt-12px" :class="[codeHintClass]">&lt;div class="cn-toolbar"&gt;...筛选控件...&lt;/div&gt;</div>
           </NCard>
 
           <!-- cn-stat-row -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.statRow') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.statRowHint') }}</p>
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.statRowHint') }}</p>
             <div class="cn-stat-row">
               <NCard
                 v-for="item in statMetrics"
@@ -456,17 +618,15 @@ const showEmptyDemo = ref(false);
                 :bordered="false"
                 size="small"
               >
-                <div class="text-12px text-gray-500 mb-4px">{{ item.label }}</div>
+                <div class="cn-text-sm mb-4px">{{ item.label }}</div>
                 <div class="flex items-baseline gap-4px">
-                  <span class="text-24px font-600 text-primary font-mono">{{ item.value }}</span>
-                  <span class="text-12px text-gray-400">{{ item.unit }}</span>
+                  <span class="cn-text-xl text-primary font-mono">{{ item.value }}</span>
+                  <span class="cn-text-sm">{{ item.unit }}</span>
                 </div>
                 <div class="text-11px text-cn-green-aux mt-4px">{{ item.trend }}</div>
               </NCard>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;div class="cn-stat-row"&gt; + cn-card cn-card-metric&lt;/div&gt;
             </div>
           </NCard>
@@ -474,8 +634,8 @@ const showEmptyDemo = ref(false);
           <!-- cn-kv-grid -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.kvGrid') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.kvGridHint') }}</p>
-            <div class="p-16px rd-8px bg-container border border-primary/12">
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.kvGridHint') }}</p>
+            <div class="cn-industrial-panel">
               <div class="cn-kv-grid">
                 <div v-for="item in deviceParams" :key="item.label">
                   <div class="cn-kv-label">{{ item.label }}</div>
@@ -483,9 +643,7 @@ const showEmptyDemo = ref(false);
                 </div>
               </div>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;div class="cn-kv-label"&gt;SOC&lt;/div&gt;
               <br />
               &lt;div class="cn-kv-value"&gt;87.2%&lt;/div&gt;
@@ -495,19 +653,17 @@ const showEmptyDemo = ref(false);
           <!-- cn-status-dot -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.statusDot') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.statusDotHint') }}</p>
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.statusDotHint') }}</p>
             <div class="flex flex-wrap gap-24px">
               <div v-for="item in statusDotExamples" :key="item.desc" class="flex items-center gap-8px">
                 <span :class="item.class" />
                 <div>
                   <div class="text-14px">{{ item.label }}</div>
-                  <div class="text-11px text-gray-400 font-mono">{{ item.desc }}</div>
+                  <div class="cn-text-sm font-mono text-cn-text-hint">{{ item.desc }}</div>
                 </div>
               </div>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;span class="cn-status-dot cn-status-dot-running" /&gt; 运行中
             </div>
           </NCard>
@@ -515,14 +671,12 @@ const showEmptyDemo = ref(false);
           <!-- cn-section-title -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.sectionTitle') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.sectionTitleHint') }}</p>
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.sectionTitleHint') }}</p>
             <NSpace vertical :size="12">
               <div class="cn-section-title">实时监测数据</div>
               <div class="cn-section-title">历史趋势分析</div>
             </NSpace>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;div class="cn-section-title"&gt;实时监测数据&lt;/div&gt;
             </div>
           </NCard>
@@ -530,23 +684,19 @@ const showEmptyDemo = ref(false);
           <!-- cn-chart-wrap -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.chartWrap') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.chartWrapHint') }}</p>
-            <div class="cn-chart-wrap flex flex-col items-center justify-center gap-8px text-gray-400">
-              <span class="text-13px">ECharts 挂载区域 · min-h-360px</span>
-              <span class="text-11px font-mono text-gray-300">ref="chartRef" + initChart()</span>
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.chartWrapHint') }}</p>
+            <div class="cn-chart-wrap flex flex-col items-center justify-center gap-8px cn-text-hint">
+              <span class="cn-text-secondary text-14px">ECharts 挂载区域 · min-h-360px</span>
+              <span class="cn-text-sm font-mono">ref="chartRef" + initChart()</span>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
-              &lt;div ref="chartRef" class="cn-chart-wrap" /&gt;
-            </div>
+            <div class="mt-12px" :class="[codeHintClass]">&lt;div ref="chartRef" class="cn-chart-wrap" /&gt;</div>
           </NCard>
 
           <!-- cn-empty -->
           <NCard :bordered="false" class="cn-card card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.empty') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.emptyHint') }}</p>
-            <div class="rd-8px border border-primary/12">
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.emptyHint') }}</p>
+            <div class="cn-industrial-panel p-0 overflow-hidden">
               <div v-if="showEmptyDemo" class="cn-empty">
                 <span>暂无告警记录</span>
                 <NButton class="cn-btn cn-btn-ghost mt-12px" size="small" @click="showEmptyDemo = false">
@@ -559,18 +709,14 @@ const showEmptyDemo = ref(false);
                 </NButton>
               </div>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
-              &lt;div class="cn-empty"&gt;暂无数据&lt;/div&gt;
-            </div>
+            <div class="mt-12px" :class="[codeHintClass]">&lt;div class="cn-empty"&gt;暂无数据&lt;/div&gt;</div>
           </NCard>
 
           <!-- cn-page 完整组合 -->
           <NCard :bordered="false" class="cn-card cn-card-highlight card-wrapper">
             <div class="cn-section-title mb-16px">{{ $t('page.themeShowcase.pageLayout.fullPage') }}</div>
-            <p class="text-12px text-gray-400 mb-12px">{{ $t('page.themeShowcase.pageLayout.fullPageHint') }}</p>
-            <div class="cn-page p-16px rd-8px bg-primary/2 border border-primary/10">
+            <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.pageLayout.fullPageHint') }}</p>
+            <div class="cn-page cn-industrial-panel">
               <div class="cn-page-header">
                 <div>
                   <h2 class="cn-page-title">BMS 电池包监控</h2>
@@ -591,8 +737,8 @@ const showEmptyDemo = ref(false);
                   :bordered="false"
                   size="small"
                 >
-                  <div class="text-12px text-gray-500">{{ item.label }}</div>
-                  <div class="text-20px font-600 text-primary font-mono mt-4px">{{ item.value }} {{ item.unit }}</div>
+                  <div class="cn-text-sm">{{ item.label }}</div>
+                  <div class="cn-text-lg text-primary font-mono mt-4px">{{ item.value }} {{ item.unit }}</div>
                 </NCard>
               </div>
               <div class="cn-section-title">实时参数</div>
@@ -602,15 +748,85 @@ const showEmptyDemo = ref(false);
                   <div class="cn-kv-value">{{ item.value }}</div>
                 </div>
               </div>
-              <div class="cn-chart-wrap flex items-center justify-center text-gray-400 text-13px">SOC 趋势图</div>
+              <div class="cn-chart-wrap flex items-center justify-center cn-text-hint cn-text-secondary text-14px">
+                SOC 趋势图
+              </div>
             </div>
-            <div
-              class="p-8px px-12px rd-4px bg-primary/4 border border-primary/20 border-dashed font-mono text-12px text-cn-blue-80 break-all mt-12px"
-            >
+            <div class="mt-12px" :class="[codeHintClass]">
               &lt;div class="cn-page"&gt; ... 组合以上所有 layout class ... &lt;/div&gt;
             </div>
           </NCard>
         </NSpace>
+      </NTabPane>
+
+      <!-- 工业化图表 & 滚动条 -->
+      <NTabPane name="industrial" :tab="$t('page.themeShowcase.tabs.industrial')">
+        <NSpace vertical :size="16">
+          <NCard :bordered="false" class="cn-card card-wrapper">
+            <div class="cn-section-title mb-12px">{{ $t('page.themeShowcase.industrial.charts') }}</div>
+            <p class="cn-text-sm mb-16px">{{ $t('page.themeShowcase.industrial.chartsHint') }}</p>
+            <IndustrialCharts />
+          </NCard>
+
+          <NGrid cols="1 m:2" :x-gap="16" :y-gap="16" responsive="screen">
+            <NGi>
+              <NCard :bordered="false" class="cn-card card-wrapper">
+                <div class="cn-section-title mb-12px">{{ $t('page.themeShowcase.industrial.scrollbar') }}</div>
+                <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.industrial.scrollbarHint') }}</p>
+                <div class="cn-industrial-panel cn-scrollbar h-240px">
+                  <div
+                    v-for="item in scrollbarDemoItems"
+                    :key="item.id"
+                    class="flex items-center justify-between py-10px px-8px border-b border-cn-border last:border-b-0 hover:bg-cn-hover rd-4px cn-text-base"
+                  >
+                    <span class="font-mono">{{ item.name }}</span>
+                    <span class="cn-text-sm">SOC {{ item.soc }}</span>
+                    <NTag
+                      size="small"
+                      :bordered="false"
+                      :class="item.status === '告警' ? 'cn-tag cn-tag-alarm' : 'cn-tag cn-tag-running'"
+                    >
+                      {{ item.status }}
+                    </NTag>
+                  </div>
+                </div>
+                <div class="mt-12px" :class="[codeHintClass]">class="cn-scrollbar"</div>
+              </NCard>
+            </NGi>
+            <NGi>
+              <NCard :bordered="false" class="cn-card card-wrapper">
+                <div class="cn-section-title mb-12px">{{ $t('page.themeShowcase.industrial.monitor') }}</div>
+                <p class="cn-text-sm mb-12px">{{ $t('page.themeShowcase.industrial.monitorHint') }}</p>
+                <div class="cn-industrial-panel">
+                  <div class="cn-stat-row mb-16px">
+                    <div
+                      v-for="item in statMetrics.slice(0, 2)"
+                      :key="item.label"
+                      class="p-12px rd-6px bg-container border border-cn-border"
+                    >
+                      <div class="cn-text-sm">{{ item.label }}</div>
+                      <div class="text-22px font-600 text-primary font-mono mt-4px">
+                        {{ item.value }}
+                        <span class="text-12px text-cn-text-hint">{{ item.unit }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cn-kv-grid">
+                    <div v-for="item in deviceParams.slice(0, 4)" :key="item.label">
+                      <div class="cn-kv-label">{{ item.label }}</div>
+                      <div class="cn-kv-value">{{ item.value }}</div>
+                    </div>
+                  </div>
+                </div>
+              </NCard>
+            </NGi>
+          </NGrid>
+        </NSpace>
+      </NTabPane>
+
+      <!-- EMS 业务场景 -->
+      <NTabPane name="ems" :tab="$t('page.themeShowcase.tabs.ems')">
+        <EmsBusinessShowcase />
       </NTabPane>
     </NTabs>
 

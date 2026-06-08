@@ -7,10 +7,10 @@ export const themeSettings: App.Theme.ThemeSetting = {
   themeColor: '#0028AA',
   themeRadius: 6,
   otherColor: {
-    info: '#015286',
-    success: '#03a53d',
-    warning: '#faad14',
-    error: '#f5222d'
+    info: '#1677FF',
+    success: '#2CCFDC',
+    warning: '#F4BB4A',
+    error: '#F76359'
   },
   isInfoFollowPrimary: true,
   layout: {
@@ -68,9 +68,9 @@ export const themeSettings: App.Theme.ThemeSetting = {
     light: {
       colors: {
         container: 'rgb(255, 255, 255)',
-        layout: 'rgb(247, 250, 252)',
+        layout: 'rgb(246, 249, 254)',
         inverted: 'rgb(0, 20, 40)',
-        'base-text': 'rgb(31, 31, 31)'
+        'base-text': 'rgb(2, 1, 15)'
       },
       boxShadow: {
         header: '0 1px 2px rgb(0, 21, 41, 0.08)',

@@ -21,7 +21,7 @@ export default defineConfig({
     }
   },
   shortcuts: {
-    'card-wrapper': 'rd-8px shadow-sm'
+    'card-wrapper': 'rd-6px shadow-sm'
   },
   safelist: [
     'cn-btn',
@@ -70,7 +70,30 @@ export default defineConfig({
     'cn-status-dot-alarm',
     'cn-status-dot-offline',
     'cn-chart-wrap',
-    'cn-empty'
+    'cn-empty',
+    'cn-text-xl',
+    'cn-text-lg',
+    'cn-text-md',
+    'cn-text-base',
+    'cn-text-sm',
+    'cn-text-secondary',
+    'cn-text-hint',
+    'cn-scrollbar',
+    'cn-industrial-panel',
+    'cn-rd-sm',
+    'cn-rd-md',
+    'cn-rd-lg',
+    'cn-module-lg',
+    'border-cn-border',
+    'bg-cn-hover',
+    'bg-cn-bg',
+    'text-cn-text-primary',
+    'text-cn-text-secondary',
+    'text-cn-text-hint',
+    'text-cn-success',
+    'bg-cn-success',
+    'text-cn-info',
+    'bg-cn-blue-hover'
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   presets: [presetWind3({ dark: 'class' }), presetSoybeanAdmin(), presetChuneng()]

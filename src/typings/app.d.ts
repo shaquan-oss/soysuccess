@@ -562,6 +562,16 @@ declare namespace App {
           blueScale: string;
           greenScale: string;
           auxColors: string;
+          textColors: string;
+          typography: string;
+          chartColors: string;
+          generalColors: string;
+          controls: {
+            radius: string;
+            radiusHint: string;
+            buttonHeight: string;
+            buttonHeightHint: string;
+          };
           buttonVariants: string;
           buttonHint: string;
           deviceStatusTags: string;
@@ -591,6 +601,18 @@ declare namespace App {
             fullPage: string;
             fullPageHint: string;
           };
+          industrial: {
+            charts: string;
+            chartsHint: string;
+            scrollbar: string;
+            scrollbarHint: string;
+            monitor: string;
+            monitorHint: string;
+          };
+          ems: {
+            title: string;
+            hint: string;
+          };
           tabs: {
             colors: string;
             buttons: string;
@@ -598,6 +620,8 @@ declare namespace App {
             feedback: string;
             layout: string;
             pageLayout: string;
+            industrial: string;
+            ems: string;
           };
         };
       };

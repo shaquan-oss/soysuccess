@@ -1,5 +1,22 @@
+<script setup lang="ts">
+defineOptions({
+  name: 'SystemLogo'
+});
+
+interface Props {
+  /** 侧栏折叠时使用 X 图标 */
+  compact?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+  compact: false
+});
+</script>
+
 <template>
   <div class="app-logo">
+    <!--
+ 原 Soybean SVG Logo
     <svg
       width="100%"
       height="100%"
@@ -146,6 +163,20 @@
         </linearGradient>
       </defs>
     </svg>
+    -->
+
+    <!--
+ 横版 Cornex Logo（仅 icon 时见下方注释）
+    <img src="/cornex-logo.png" alt="Cornex 楚能" class="logo-img" />
+    -->
+
+    <img v-if="!compact" src="/cornex-logo.png" alt="Cornex 楚能" class="logo-img logo-img--full" />
+    <img v-else src="/cornex-logo-icon.svg" alt="Cornex" class="logo-img logo-img--icon" />
+
+    <!--
+ 仅 icon（侧栏展开时显示过小，已改为横版 Logo）
+    <img src="/cornex-logo-icon.svg" alt="Cornex" class="logo-img" />
+    -->
   </div>
 </template>
 
@@ -156,5 +187,26 @@
   --logo-color-500: rgb(var(--primary-500-color));
   --logo-color-600: rgb(var(--primary-600-color));
   --logo-color-700: rgb(var(--primary-700-color));
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.logo-img {
+  display: block;
+  object-fit: contain;
+}
+
+.logo-img--full {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-position: left center;
+}
+
+.logo-img--icon {
+  width: 100%;
+  height: 100%;
 }
 </style>

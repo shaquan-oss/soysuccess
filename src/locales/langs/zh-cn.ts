@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: 'Soybean 管理系统',
+    title: '管理系统',
     updateTitle: '系统版本更新通知',
     updateContent: '检测到系统有新版本发布，是否立即刷新页面？',
     updateConfirm: '立即刷新',
@@ -310,11 +310,22 @@ const local: App.I18n.Schema = {
     },
     themeShowcase: {
       title: '楚能 Cornex 设计系统',
-      subtitle: '能源管理系统 · 品牌配色与 cn-* UnoCSS 组件样式展示',
+      subtitle: '能源管理系统 · UI 设计稿 v2 配色 / 字体 / 图表 / cn-* 组件展示',
       semanticColors: '语义色（跟随主题动态变化）',
       blueScale: '楚能蓝 · 标准色阶',
       greenScale: '楚能绿 · 标准色阶',
-      auxColors: '辅助色',
+      auxColors: '交互与布局色',
+      textColors: '文字色阶',
+      typography: '字体层级',
+      chartColors: '图表辅配色',
+      generalColors: '一般 UI 色',
+      controls: {
+        radius: '圆角规范',
+        radiusHint: '三级圆角：大模块 10px · 小模块/弹窗 6px · 按钮/标签 4px（Naive 覆盖 + cn-rd-* shortcuts）',
+        buttonHeight: '按钮高度',
+        buttonHeightHint:
+          'Small 32px（表格行内）· Medium 36px（默认）· Large 48px（重点主操作），由 naive-chuneng 全局覆盖'
+      },
       buttonVariants: '按钮样式',
       buttonHint: '在 Naive UI 组件上添加 cn-* UnoCSS shortcut class 即可应用楚能工业风格',
       deviceStatusTags: '设备状态标签（电芯行业语义）',
@@ -344,13 +355,27 @@ const local: App.I18n.Schema = {
         fullPage: '完整页面组合 cn-page',
         fullPageHint: '将以上 layout class 组合使用的典型业务页结构'
       },
+      industrial: {
+        charts: '工业图表（ECharts）',
+        chartsHint: '使用设计稿辅配色，适用于 SOC 趋势、产量、在线率、告警分布',
+        scrollbar: '工业风滚动条 cn-scrollbar',
+        scrollbarHint: '细滚动条 + 悬停变品牌蓝，列表区域可滚动浏览设备',
+        monitor: '监测面板示例',
+        monitorHint: 'KPI + 参数网格，背景/边框/悬停色均来自设计稿'
+      },
+      ems: {
+        title: 'EMS 能源管理业务场景',
+        hint: '基于 Naive UI + cn-* 的储能站监测、告警处置、参数下发等典型页面组件'
+      },
       tabs: {
         colors: '品牌配色',
         buttons: '按钮',
         tags: '标签',
         feedback: '表单反馈',
         layout: '卡片弹窗',
-        pageLayout: '页面布局'
+        pageLayout: '页面布局',
+        industrial: '工业图表',
+        ems: 'EMS 业务'
       }
     }
   },

@@ -3,7 +3,14 @@
 import type { Preset } from '@unocss/core';
 import type { Theme } from '@unocss/preset-mini';
 
-export { presetChuneng, chunengThemeColors, chunengBlueScale, chunengGreenScale } from './chuneng';
+export {
+  presetChuneng,
+  chunengThemeColors,
+  chunengBlueScale,
+  chunengGreenScale,
+  chunengChartPalette,
+  chunengGeneralColors
+} from './chuneng';
 
 export function presetSoybeanAdmin(): Preset<Theme> {
   const preset: Preset<Theme> = {

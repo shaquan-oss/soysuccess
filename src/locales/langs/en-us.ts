@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: 'SoybeanAdmin',
+    title: 'Management System',
     updateTitle: 'System Version Update Notification',
     updateContent: 'A new version of the system has been detected. Do you want to refresh the page immediately?',
     updateConfirm: 'Refresh immediately',
@@ -318,7 +318,18 @@ const local: App.I18n.Schema = {
       semanticColors: 'Semantic Colors (dynamic with theme)',
       blueScale: 'ChuNeng Blue · Color Scale',
       greenScale: 'ChuNeng Green · Color Scale',
-      auxColors: 'Auxiliary Colors',
+      auxColors: 'Interaction & Layout Colors',
+      textColors: 'Text Colors',
+      typography: 'Typography Scale',
+      chartColors: 'Chart Palette',
+      generalColors: 'General UI Colors',
+      controls: {
+        radius: 'Border Radius',
+        radiusHint:
+          '3 levels: large module 10px · modal/card 6px · button/tag 4px (Naive overrides + cn-rd-* shortcuts)',
+        buttonHeight: 'Button Height',
+        buttonHeightHint: 'Small 32px · Medium 36px (default) · Large 48px — applied via naive-chuneng global overrides'
+      },
       buttonVariants: 'Button Styles',
       buttonHint: 'Add cn-* UnoCSS shortcut class to Naive UI components to apply industrial style',
       deviceStatusTags: 'Device Status Tags (Battery Industry)',
@@ -348,13 +359,27 @@ const local: App.I18n.Schema = {
         fullPage: 'Full Page cn-page',
         fullPageHint: 'Typical business page combining all layout classes above'
       },
+      industrial: {
+        charts: 'Industrial Charts (ECharts)',
+        chartsHint: 'Design palette for SOC trend, production, online rate, alarm distribution',
+        scrollbar: 'Industrial Scrollbar cn-scrollbar',
+        scrollbarHint: 'Thin scrollbar with brand-blue hover for scrollable lists',
+        monitor: 'Monitor Panel Demo',
+        monitorHint: 'KPI + KV grid using design tokens for bg/border/hover'
+      },
+      ems: {
+        title: 'EMS Business Scenarios',
+        hint: 'Typical EMS pages: station monitoring, alarm tickets, parameter dispatch via Naive UI + cn-*'
+      },
       tabs: {
         colors: 'Colors',
         buttons: 'Buttons',
         tags: 'Tags',
         feedback: 'Feedback',
         layout: 'Cards & Modal',
-        pageLayout: 'Page Layout'
+        pageLayout: 'Page Layout',
+        industrial: 'Industrial Charts',
+        ems: 'EMS Business'
       }
     }
   },
