@@ -3,7 +3,6 @@ import { presetChuneng, presetSoybeanAdmin } from '@sa/uno-preset';
 import { themeVars } from './src/theme/vars';
 
 export default defineConfig({
-  // 扫描文件
   content: {
     pipeline: {
       exclude: ['node_modules', 'dist']
