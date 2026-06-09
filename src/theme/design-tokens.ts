@@ -57,6 +57,12 @@ export const chunengDesignTokens = {
     small: 32,
     medium: 36,
     large: 48
+  },
+  /** 按钮左右间距：保存 44 / 下载打印 28 / + 新增 34 */
+  buttonPaddingX: {
+    save: 44,
+    tool: 28,
+    add: 34
   }
 } as const;
 

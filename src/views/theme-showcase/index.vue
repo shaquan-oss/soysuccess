@@ -2,8 +2,26 @@
 import { h, ref } from 'vue';
 import type { DataTableColumns } from 'naive-ui';
 import { NTag } from 'naive-ui';
-import { chunengBlueScale, chunengChartPalette, chunengGeneralColors, chunengGreenScale } from '@sa/uno-preset';
-import { chunengDesignTokens } from '@/theme/design-tokens';
+import {
+  showcaseAuxColors,
+  showcaseBlueScale,
+  showcaseButtonHeightSpec,
+  showcaseButtonInteractionColors,
+  showcaseButtonPaddingSpec,
+  showcaseChartColors,
+  showcaseCodeHintClass,
+  showcaseDeviceParams,
+  showcaseGeneralColors,
+  showcaseGreenScale,
+  showcaseRadiusSpec,
+  showcaseScrollbarDemoItems,
+  showcaseSelectOptions,
+  showcaseStatMetrics,
+  showcaseStatusDotExamples,
+  showcaseTableData,
+  showcaseTextColors,
+  type ShowcaseDeviceRow
+} from '@/theme/showcase-data';
 import IndustrialCharts from './modules/industrial-charts.vue';
 import EmsBusinessShowcase from './modules/ems-business.vue';
 import { useThemeStore } from '@/store/modules/theme';
@@ -26,36 +44,18 @@ const checkboxValues = ref(['opt1']);
 const switchEnabled = ref(true);
 const activeTab = ref('colors');
 
-const selectOptions = [
-  { label: '产线 A · 电芯组装', value: 'line-a' },
-  { label: '产线 B · 化成分容', value: 'line-b' },
-  { label: '产线 C · PACK 集成', value: 'line-c' }
-];
+const selectOptions = showcaseSelectOptions;
 
-interface DeviceRow {
-  id: number;
-  name: string;
-  status: 'running' | 'charging' | 'alarm' | 'offline';
-  soc: number;
-  temperature: number;
-}
-
-const statusTagMap: Record<DeviceRow['status'], { class: string; label: string }> = {
+const statusTagMap: Record<ShowcaseDeviceRow['status'], { class: string; label: string }> = {
   running: { class: 'cn-tag cn-tag-running', label: '运行中' },
   charging: { class: 'cn-tag cn-tag-charging', label: '充电中' },
   alarm: { class: 'cn-tag cn-tag-alarm', label: '告警' },
   offline: { class: 'cn-tag cn-tag-offline', label: '离线' }
 };
 
-const tableData: DeviceRow[] = [
-  { id: 1, name: 'BMS-001', status: 'running', soc: 87, temperature: 32.5 },
-  { id: 2, name: 'BMS-002', status: 'charging', soc: 45, temperature: 28.1 },
-  { id: 3, name: 'BMS-003', status: 'alarm', soc: 12, temperature: 48.6 },
-  { id: 4, name: 'BMS-004', status: 'offline', soc: 0, temperature: 0 },
-  { id: 5, name: 'PCS-001', status: 'running', soc: 92, temperature: 35.2 }
-];
+const tableData = showcaseTableData;
 
-const columns: DataTableColumns<DeviceRow> = [
+const columns: DataTableColumns<ShowcaseDeviceRow> = [
   { title: '设备编号', key: 'name', width: 120 },
   {
     title: '状态',
@@ -82,8 +82,8 @@ const columns: DataTableColumns<DeviceRow> = [
   }
 ];
 
-const blueScale = chunengBlueScale;
-const greenScale = chunengGreenScale;
+const blueScale = showcaseBlueScale;
+const greenScale = showcaseGreenScale;
 
 const semanticColors = [
   { name: 'primary', label: '主色 Primary', color: themeStore.themeColor },
@@ -93,101 +93,20 @@ const semanticColors = [
   { name: 'error', label: '错误 Error', color: themeStore.otherColor.error }
 ];
 
-const auxColors = [
-  { label: '主色 Hover', hex: chunengDesignTokens.color.primaryHover },
-  { label: '主色 Pressed', hex: chunengDesignTokens.color.primaryPressed },
-  { label: '边框/分割线', hex: chunengDesignTokens.color.border },
-  { label: '页面背景', hex: chunengDesignTokens.color.bgPage },
-  { label: '列表悬停', hex: chunengDesignTokens.color.rowHover }
-];
-
-const textColors = [
-  { label: '一级文字', hex: chunengDesignTokens.color.textPrimary },
-  { label: '二级文字', hex: chunengDesignTokens.color.textSecondary },
-  { label: '提示文字', hex: chunengDesignTokens.color.textHint }
-];
-
-const chartColors = chunengChartPalette.map((hex, i) => ({
-  label: `Chart ${i + 1}`,
-  hex
-}));
-
-const generalColors = chunengGeneralColors;
-
-const scrollbarDemoItems = Array.from({ length: 24 }, (_, i) => ({
-  id: i + 1,
-  name: `BMS-${String(i + 1).padStart(3, '0')}`,
-  soc: `${60 + (i % 35)}%`,
-  status: i % 5 === 0 ? '告警' : '运行中'
-}));
-
-/** KPI 指标（cn-stat-row 示例） */
-const statMetrics = [
-  { label: '今日产量', value: '12,580', unit: 'PCS', trend: '+8.2%' },
-  { label: '设备在线率', value: '96.4', unit: '%', trend: '+0.3%' },
-  { label: '告警数', value: '3', unit: '条', trend: '-2' },
-  { label: '平均 SOC', value: '78.6', unit: '%', trend: '稳定' }
-];
-
-/** 设备参数（cn-kv-grid 示例） */
-const deviceParams = [
-  { label: 'SOC', value: '87.2%' },
-  { label: 'SOH', value: '98.1%' },
-  { label: '电压', value: '3.65 V' },
-  { label: '电流', value: '12.3 A' },
-  { label: '温度', value: '32.5 ℃' },
-  { label: '循环次数', value: '1,024' }
-];
-
-const statusDotExamples = [
-  { class: 'cn-status-dot cn-status-dot-running', label: '运行中', desc: 'cn-status-dot-running' },
-  { class: 'cn-status-dot cn-status-dot-alarm', label: '告警', desc: 'cn-status-dot-alarm' },
-  { class: 'cn-status-dot cn-status-dot-offline', label: '离线', desc: 'cn-status-dot-offline' }
-];
-
+const auxColors = showcaseAuxColors;
+const textColors = showcaseTextColors;
+const chartColors = showcaseChartColors;
+const generalColors = showcaseGeneralColors;
+const scrollbarDemoItems = showcaseScrollbarDemoItems;
+const statMetrics = showcaseStatMetrics;
+const deviceParams = showcaseDeviceParams;
+const statusDotExamples = showcaseStatusDotExamples;
 const showEmptyDemo = ref(false);
-
-/** 代码片段提示框（统一设计稿边框/背景） */
-const codeHintClass =
-  'p-8px px-12px rd-4px bg-cn-bg border border-cn-border border-dashed font-mono cn-text-sm text-cn-text-hint break-all';
-
-/** 设计稿按钮交互色 */
-const buttonInteractionColors = [
-  { label: '默认 Default', hex: chunengDesignTokens.color.primary },
-  { label: 'Hover', hex: chunengDesignTokens.color.primaryHover },
-  { label: 'Pressed', hex: chunengDesignTokens.color.primaryPressed }
-];
-
-/** 设计稿圆角规范 */
-const radiusSpec = [
-  {
-    label: '大模块圆角',
-    px: chunengDesignTokens.radius.lg,
-    usage: '页面大区块、主容器',
-    shortcut: 'cn-rd-lg / cn-module-lg'
-  },
-  {
-    label: '小模块 / 弹窗 / 下拉 / 大切换',
-    px: chunengDesignTokens.radius.md,
-    usage: 'Card、Modal、Dropdown、Switch(medium+)',
-    shortcut: 'cn-rd-md'
-  },
-  {
-    label: '按钮 / 标签 / 小切换',
-    px: chunengDesignTokens.radius.sm,
-    usage: 'Button、Tag、Input、Switch(small)',
-    shortcut: 'cn-rd-sm'
-  }
-];
-
-type ButtonSize = 'small' | 'medium' | 'large';
-
-/** 设计稿按钮高度 */
-const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
-  { size: 'small', px: chunengDesignTokens.buttonHeight.small, desc: '表格内或空间紧凑的行级操作' },
-  { size: 'medium', px: chunengDesignTokens.buttonHeight.medium, desc: '主流页面级操作按钮（默认）' },
-  { size: 'large', px: chunengDesignTokens.buttonHeight.large, desc: '重点主操作或强调区域' }
-];
+const codeHintClass = showcaseCodeHintClass;
+const buttonInteractionColors = showcaseButtonInteractionColors;
+const radiusSpec = showcaseRadiusSpec;
+const buttonHeightSpec = showcaseButtonHeightSpec;
+const buttonPaddingSpec = showcaseButtonPaddingSpec;
 </script>
 
 <template>
@@ -386,26 +305,48 @@ const buttonHeightSpec: { size: ButtonSize; px: number; desc: string }[] = [
             </div>
 
             <div>
-              <div class="cn-text-secondary text-14px mb-8px">主要操作</div>
+              <div class="cn-text-secondary text-14px mb-8px">设计稿 · 按钮类型（搜索 / 导出 / 确定 / 取消 / 新增）</div>
               <div class="flex flex-wrap items-center gap-12px">
-                <NButton class="cn-btn cn-btn-primary" type="primary">主要按钮</NButton>
-                <NButton class="cn-btn cn-btn-accent" type="success">能源强调</NButton>
-                <NButton class="cn-btn cn-btn-success" type="success">成功操作</NButton>
-                <NButton class="cn-btn cn-btn-danger" type="error">危险操作</NButton>
-                <NButton class="cn-btn cn-btn-warning" type="warning">警告操作</NButton>
+                <NButton class="cn-btn cn-btn-primary cn-btn-px-tool" type="primary">搜索</NButton>
+                <NButton class="cn-btn cn-btn-primary cn-btn-px-tool" type="primary">导出</NButton>
+                <NButton class="cn-btn cn-btn-primary cn-btn-px-save" type="primary">确定</NButton>
+                <NButton class="cn-btn cn-btn-secondary">取消</NButton>
+                <NButton class="cn-btn cn-btn-outline">+ 新增任务</NButton>
+                <NButton class="cn-btn cn-btn-primary cn-btn-px-add" type="primary">+ 新增</NButton>
               </div>
               <div class="mt-8px" :class="[codeHintClass]">
-                &lt;NButton class="cn-btn cn-btn-primary" type="primary"&gt;
+                cn-btn-primary / cn-btn-secondary / cn-btn-outline + cn-btn-px-save|tool|add
               </div>
             </div>
 
             <div>
-              <div class="cn-text-secondary text-14px mb-8px">次要 / 工业风格</div>
+              <div class="cn-text-secondary text-14px mb-8px">状态：禁用 / 成功</div>
               <div class="flex flex-wrap items-center gap-12px">
-                <NButton class="cn-btn cn-btn-ghost">幽灵按钮</NButton>
+                <NButton class="cn-btn cn-btn-primary" type="primary" disabled>禁用</NButton>
+                <NButton class="cn-btn cn-btn-success" type="success">成功</NButton>
+                <NButton class="cn-btn cn-btn-secondary-success">取消·成功</NButton>
+                <NButton class="cn-btn cn-btn-outline-success">+ 新增任务·成功</NButton>
+                <NButton class="cn-btn cn-btn-danger" type="error">危险</NButton>
+                <NButton class="cn-btn cn-btn-warning" type="warning">警告</NButton>
+              </div>
+            </div>
+
+            <div>
+              <div class="cn-text-secondary text-14px mb-8px">左右间距规范</div>
+              <div class="flex flex-wrap items-end gap-16px">
+                <div v-for="item in buttonPaddingSpec" :key="item.label" class="flex flex-col items-center gap-6px">
+                  <NButton class="cn-btn cn-btn-primary" :class="item.shortcut" type="primary">{{ item.label }}</NButton>
+                  <span class="cn-text-sm font-mono">{{ item.px }}px · {{ item.shortcut }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="cn-text-secondary text-14px mb-8px">其他风格</div>
+              <div class="flex flex-wrap items-center gap-12px">
+                <NButton class="cn-btn cn-btn-accent" type="success">能源强调</NButton>
                 <NButton class="cn-btn cn-btn-industrial">INDUSTRIAL-01</NButton>
                 <NButton class="cn-btn cn-btn-text" text>文字按钮</NButton>
-                <NButton class="cn-btn cn-btn-primary" type="primary" disabled>禁用状态</NButton>
                 <NButton class="cn-btn cn-btn-primary" type="primary" loading>加载中</NButton>
               </div>
             </div>

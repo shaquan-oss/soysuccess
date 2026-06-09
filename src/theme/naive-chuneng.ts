@@ -48,7 +48,14 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     borderPrimary: border(color.primary),
     borderHoverPrimary: border(color.primaryHover),
     borderPressedPrimary: border(color.primaryPressed),
-    borderFocusPrimary: border(color.primary)
+    borderFocusPrimary: border(color.primary),
+    colorDisabled: color.disabled,
+    colorDisabledPrimary: color.disabled,
+    textColorDisabled: '#FFFFFF',
+    textColorDisabledPrimary: '#FFFFFF',
+    borderDisabled: border(color.disabled),
+    borderDisabledPrimary: border(color.disabled),
+    opacityDisabled: '1'
   },
   Tag: {
     borderRadius: r(radius.sm),

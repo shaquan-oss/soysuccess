@@ -69,49 +69,9 @@ export const chunengThemeColors = {
   }
 };
 
-/** 图表色板（有序数组） */
-export const chunengChartPalette = [
-  chunengThemeColors.cn.chart[1],
-  chunengThemeColors.cn.chart[2],
-  chunengThemeColors.cn.chart[3],
-  chunengThemeColors.cn.chart[4],
-  chunengThemeColors.cn.chart[5],
-  chunengThemeColors.cn.chart[6],
-  chunengThemeColors.cn.chart[7],
-  chunengThemeColors.cn.chart[8],
-  chunengThemeColors.cn.chart[9]
-];
-
-/** 有序色阶 */
-export const chunengBlueScale = [
-  { label: '100%', hex: chunengThemeColors.cn.blue[100] },
-  { label: 'Hover', hex: chunengThemeColors.cn.blue.hover },
-  { label: 'Pressed', hex: chunengThemeColors.cn.blue.pressed },
-  { label: '80%', hex: chunengThemeColors.cn.blue[80] },
-  { label: '60%', hex: chunengThemeColors.cn.blue[60] },
-  { label: '40%', hex: chunengThemeColors.cn.blue[40] },
-  { label: '20%', hex: chunengThemeColors.cn.blue[20] },
-  { label: '10%', hex: chunengThemeColors.cn.blue[10] }
-];
-
-export const chunengGreenScale = [
-  { label: '100%', hex: chunengThemeColors.cn.green[100] },
-  { label: '90%', hex: chunengThemeColors.cn.green[90] },
-  { label: '80%', hex: chunengThemeColors.cn.green[80] },
-  { label: '60%', hex: chunengThemeColors.cn.green[60] },
-  { label: '40%', hex: chunengThemeColors.cn.green[40] },
-  { label: '20%', hex: chunengThemeColors.cn.green[20] },
-  { label: '10%', hex: chunengThemeColors.cn.green[10] }
-];
-
-/** 设计稿一般色 + 图表色 */
-export const chunengGeneralColors = [
-  { label: '边框/分割线', hex: chunengThemeColors.cn.border },
-  { label: '背景色', hex: chunengThemeColors.cn.bg },
-  { label: '列表悬停', hex: chunengThemeColors.cn.hover },
-  { label: '禁用', hex: chunengThemeColors.cn.disabled },
-  { label: '小图标', hex: chunengThemeColors.cn.icon }
-];
+/** NaiveUI 按钮覆写片段（设计稿：正常 / 悬停 / 按下 / 禁用） */
+const cnBtnDisabledSolid =
+  '[&.n-button--disabled]:!bg-cn-disabled [&.n-button--disabled]:!text-white [&.n-button--disabled]:!border-0 [&.n-button--disabled]:!shadow-none [&.n-button--disabled_.n-button__border]:!hidden [&.n-button--disabled_.n-button__state-border]:!hidden [--n-border-disabled:1px_solid_transparent] [--n-border-color-disabled:transparent] [--n-color-disabled:#BEC3C9] [--n-color-disabled-primary:#BEC3C9]';
 
 /** 楚能 cn-* 语义化 shortcuts */
 const chunengShortcuts: Record<string, string> = {
@@ -155,15 +115,33 @@ const chunengShortcuts: Record<string, string> = {
   'cn-scrollbar':
     'overflow-auto [scrollbar-width:thin] [scrollbar-color:var(--cn-scrollbar-thumb)_transparent] [&::-webkit-scrollbar]:w-6px [&::-webkit-scrollbar]:h-6px [&::-webkit-scrollbar-thumb]:rd-3px [&::-webkit-scrollbar-thumb]:bg-cn-border hover:[&::-webkit-scrollbar-thumb]:bg-cn-blue-hover [&::-webkit-scrollbar-track]:bg-transparent',
 
-  // ---------- 按钮 ----------
-  'cn-btn': 'font-500 tracking-wide transition-all duration-200 ease-in-out',
-  'cn-btn-primary':
-    'cn-btn !bg-cn-blue-100 !border !border-cn-blue-100 !text-white hover:!bg-cn-blue-hover active:!bg-cn-blue-pressed',
+  // ---------- 按钮（设计稿 03 控件：搜索/导出/确定/取消/新增） ----------
+  'cn-btn': 'cn-rd-sm cn-text-base font-500 tracking-wide transition-all duration-200 ease-in-out',
+  /** 实心主按钮：搜索 / 导出 / 确定 / + 新增 */
+  'cn-btn-primary': `cn-btn !text-white [&:not(.n-button--disabled)]:!bg-cn-blue-100 [&:not(.n-button--disabled)]:!border-cn-blue-100 [&:not(.n-button--disabled)_.n-button__border]:!border-cn-blue-100 hover:[&:not(.n-button--disabled)]:!bg-cn-blue-hover active:[&:not(.n-button--disabled)]:!bg-cn-blue-pressed ${cnBtnDisabledSolid}`,
+  /** 成功态实心：设计稿「成功」行 */
+  'cn-btn-success': `cn-btn !text-white [&:not(.n-button--disabled)]:!bg-cn-success [&:not(.n-button--disabled)]:!border-cn-success [&:not(.n-button--disabled)_.n-button__border]:!border-cn-success hover:[&:not(.n-button--disabled)]:!opacity-90 active:[&:not(.n-button--disabled)]:!opacity-80 ${cnBtnDisabledSolid}`,
+  /** 能源强调（与 success 同色实心） */
   'cn-btn-accent':
-    'cn-btn !bg-cn-success !text-white hover:!opacity-90 [--n-border:1px_solid_#2CCFDC] [--n-border-hover:1px_solid_#2CCFDC] [--n-border-pressed:1px_solid_#2CCFDC] [--n-border-color:#2CCFDC] [--n-border-color-hover:#2CCFDC] [--n-border-color-pressed:#2CCFDC] [&_.n-button__border]:!border-cn-success [&_.n-button__content]:!text-white',
-  'cn-btn-success': 'cn-btn !bg-cn-success !border !border-cn-success !text-white',
+    'cn-btn !bg-cn-success !border !border-cn-success !text-white hover:!opacity-90 active:!opacity-80 [&_.n-button__border]:!border-cn-success [&_.n-button__content]:!text-white',
+  /** 次要按钮 / 取消：灰框灰字，悬停不变，按下变实心蓝 */
+  'cn-btn-secondary':
+    'cn-btn !bg-white !border !border-cn-border !text-cn-text-secondary hover:!bg-white hover:!border-cn-border hover:!text-cn-text-secondary active:!bg-cn-blue-hover active:!border-cn-blue-hover active:!text-white [&.n-button--disabled]:!bg-white [&.n-button--disabled]:!border-cn-border [&.n-button--disabled]:!text-cn-disabled disabled:!bg-white disabled:!border-cn-border disabled:!text-cn-disabled',
+  /** @deprecated 使用 cn-btn-secondary，保留别名兼容 */
   'cn-btn-ghost':
-    'cn-btn !bg-transparent !border !border-cn-border !text-cn-blue-100 hover:!bg-cn-hover hover:!border-cn-blue-hover',
+    'cn-btn !bg-white !border !border-cn-border !text-cn-text-secondary hover:!bg-white hover:!border-cn-border hover:!text-cn-text-secondary active:!bg-cn-blue-hover active:!border-cn-blue-hover active:!text-white [&.n-button--disabled]:!bg-white [&.n-button--disabled]:!border-cn-border [&.n-button--disabled]:!text-cn-disabled disabled:!bg-white disabled:!border-cn-border disabled:!text-cn-disabled',
+  /** 描边主按钮：+ 新增任务 */
+  'cn-btn-outline':
+    'cn-btn !bg-white !border !border-cn-blue-100 !text-cn-blue-100 hover:!bg-white hover:!border-cn-blue-hover hover:!text-cn-blue-hover active:!border-cn-blue-pressed active:!text-cn-blue-pressed [&.n-button--disabled]:!bg-white [&.n-button--disabled]:!border-cn-disabled [&.n-button--disabled]:!text-cn-disabled disabled:!bg-white disabled:!border-cn-disabled disabled:!text-cn-disabled',
+  /** 次要 / 描边按钮的成功态 */
+  'cn-btn-secondary-success':
+    'cn-btn !bg-white !border !border-cn-success !text-cn-success hover:!bg-white hover:!border-cn-success hover:!text-cn-success active:!bg-cn-success/10 active:!border-cn-success active:!text-cn-success',
+  'cn-btn-outline-success':
+    'cn-btn !bg-white !border !border-cn-success !text-cn-success hover:!bg-white hover:!border-cn-success hover:!text-cn-success active:!border-cn-success active:!text-cn-success',
+  /** 左右间距：保存 44px / 下载打印 28px / + 新增 34px */
+  'cn-btn-px-save': '[--n-padding:0_44px]',
+  'cn-btn-px-tool': '[--n-padding:0_28px]',
+  'cn-btn-px-add': '[--n-padding:0_34px]',
   'cn-btn-industrial':
     'cn-btn !bg-cn-bg !border !border-cn-border !border-dashed !text-cn-text-secondary font-mono cn-text-base hover:!bg-cn-hover',
   'cn-btn-danger': 'cn-btn !bg-cn-error !border !border-cn-error !text-white hover:!opacity-90 active:!opacity-80',
