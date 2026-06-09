@@ -94,13 +94,6 @@ export const showcaseButtonHeightSpec = [
   { size: 'large' as const, px: chunengDesignTokens.buttonHeight.large, desc: '重点主操作或强调区域' }
 ];
 
-/** 设计稿按钮左右间距示例 */
-export const showcaseButtonPaddingSpec = [
-  { label: '保存', px: chunengDesignTokens.buttonPaddingX.save, shortcut: 'cn-btn-px-save' },
-  { label: '下载打印', px: chunengDesignTokens.buttonPaddingX.tool, shortcut: 'cn-btn-px-tool' },
-  { label: '+ 新增', px: chunengDesignTokens.buttonPaddingX.add, shortcut: 'cn-btn-px-add' }
-] as const;
-
 export const showcaseStatMetrics = [
   { label: '今日产量', value: '12,580', unit: 'PCS', trend: '+8.2%' },
   { label: '设备在线率', value: '96.4', unit: '%', trend: '+0.3%' },

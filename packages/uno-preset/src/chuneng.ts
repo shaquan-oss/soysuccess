@@ -69,9 +69,18 @@ export const chunengThemeColors = {
   }
 };
 
+/** UnoCSS 中 `_` 表示空格，Naive BEM 类名 `__` 须写成 `\\_\\_` */
+const nBtnBorder = 'n-button\\_\\_border';
+const nBtnStateBorder = 'n-button\\_\\_state-border';
+const nBtnContent = 'n-button\\_\\_content';
+const nCardHeaderMain = 'n-card-header\\_\\_main';
+const nDialogTitle = 'n-dialog\\_\\_title';
+const nDialogContent = 'n-dialog\\_\\_content';
+const nDialogAction = 'n-dialog\\_\\_action';
+
 /** 禁用时锁定样式，悬停/聚焦/按下均不变化 */
 const cnBtnDisabledLock =
-  '[&.n-button--disabled]:!cursor-not-allowed [&.n-button--disabled]:!transition-none [&.n-button--disabled]:!shadow-none [&.n-button--disabled]:!outline-none [&.n-button--disabled_.n-button__border]:!hidden [&.n-button--disabled_.n-button__state-border]:!hidden [&.n-button--disabled:hover_.n-button__border]:!hidden [&.n-button--disabled:hover_.n-button__state-border]:!hidden [&.n-button--disabled:focus_.n-button__state-border]:!hidden [&.n-button--disabled:active_.n-button__state-border]:!hidden [&.n-button--disabled]:[--n-color-hover:var(--n-color-disabled)] [&.n-button--disabled]:[--n-border-hover:var(--n-border-disabled)] [&.n-button--disabled]:[--n-border-color-hover:#BEC3C9] [&.n-button--disabled]:[--n-border-color-disabled:#BEC3C9]';
+  `[&.n-button--disabled]:!cursor-not-allowed [&.n-button--disabled]:!transition-none [&.n-button--disabled]:!shadow-none [&.n-button--disabled]:!outline-none [&.n-button--disabled_.${nBtnBorder}]:!hidden [&.n-button--disabled_.${nBtnStateBorder}]:!hidden [&.n-button--disabled:hover_.${nBtnBorder}]:!hidden [&.n-button--disabled:hover_.${nBtnStateBorder}]:!hidden [&.n-button--disabled:focus_.${nBtnStateBorder}]:!hidden [&.n-button--disabled:active_.${nBtnStateBorder}]:!hidden [&.n-button--disabled]:[--n-color-hover:var(--n-color-disabled)] [&.n-button--disabled]:[--n-border-hover:var(--n-border-disabled)] [&.n-button--disabled]:[--n-border-color-hover:#BEC3C9] [&.n-button--disabled]:[--n-border-color-disabled:#BEC3C9]`;
 
 /** 实心按钮禁用态（灰底白字，无悬停反馈） */
 const cnBtnDisabledSolid = `${cnBtnDisabledLock} [&.n-button--disabled]:!bg-cn-disabled [&.n-button--disabled]:!text-white [&.n-button--disabled]:!border-0 [&.n-button--disabled:hover]:!bg-cn-disabled [&.n-button--disabled:hover]:!text-white [&.n-button--disabled:hover]:!border-0 [&.n-button--disabled:focus]:!bg-cn-disabled [&.n-button--disabled:active]:!bg-cn-disabled [--n-border-disabled:1px_solid_transparent] [--n-color-disabled:#BEC3C9] [--n-color-disabled-primary:#BEC3C9]`;
@@ -81,13 +90,17 @@ const cnBtnDisabledMuted = `${cnBtnDisabledLock} [&.n-button--disabled]:!bg-whit
 
 /** 跟随主题色板（rgb(var(--primary-*-color))，随主题抽屉实时更新） */
 const cnPrimaryFill =
-  '[&:not(.n-button--disabled)]:!bg-primary [&:not(.n-button--disabled)]:!border-primary [&:not(.n-button--disabled)_.n-button__border]:!border-primary';
+  `[&:not(.n-button--disabled)]:!bg-primary [&:not(.n-button--disabled)]:!border-primary [&:not(.n-button--disabled)_.${nBtnBorder}]:!border-primary`;
 const cnPrimaryHover =
-  'hover:[&:not(.n-button--disabled)]:!bg-primary-400 hover:[&:not(.n-button--disabled)]:!border-primary-400 hover:[&:not(.n-button--disabled)_.n-button__border]:!border-primary-400';
+  `hover:[&:not(.n-button--disabled)]:!bg-primary-400 hover:[&:not(.n-button--disabled)]:!border-primary-400 hover:[&:not(.n-button--disabled)_.${nBtnBorder}]:!border-primary-400`;
 const cnPrimaryPressed =
-  'active:[&:not(.n-button--disabled)]:!bg-primary-600 active:[&:not(.n-button--disabled)]:!border-primary-600 active:[&:not(.n-button--disabled)_.n-button__border]:!border-primary-600';
+  `active:[&:not(.n-button--disabled)]:!bg-primary-600 active:[&:not(.n-button--disabled)]:!border-primary-600 active:[&:not(.n-button--disabled)_.${nBtnBorder}]:!border-primary-600`;
 const cnPrimaryFocusRing = 'shadow-[0_0_0_2px_rgb(var(--primary-color)/0.12)]';
 const cnErrorFocusRing = 'shadow-[0_0_0_2px_rgb(var(--error-color)/0.12)]';
+
+/** 弹窗内主按钮：仅 descendant，禁止用 cnPrimaryFill（会染到 .cn-modal.n-card 根节点） */
+const cnModalPrimaryBtn =
+  `[&_.n-button--primary-type]:!text-white [&_.n-button--primary-type]:!bg-primary [&_.n-button--primary-type]:!border-primary [&_.n-button--primary-type]:!border-solid hover:[&_.n-button--primary-type]:!bg-primary-400 active:[&_.n-button--primary-type]:!bg-primary-600`;
 
 /** 楚能 cn-* 语义化 shortcuts */
 const chunengShortcuts: Record<string, string> = {
@@ -136,10 +149,10 @@ const chunengShortcuts: Record<string, string> = {
   /** 实心主按钮：搜索 / 导出 / 确定 / + 新增 */
   'cn-btn-primary': `cn-btn !text-white ${cnPrimaryFill} ${cnPrimaryHover} ${cnPrimaryPressed} ${cnBtnDisabledSolid}`,
   /** 成功态实心：设计稿「成功」行 */
-  'cn-btn-success': `cn-btn !text-white [&:not(.n-button--disabled)]:!bg-success [&:not(.n-button--disabled)]:!border-success [&:not(.n-button--disabled)_.n-button__border]:!border-success hover:[&:not(.n-button--disabled)]:!opacity-90 active:[&:not(.n-button--disabled)]:!opacity-80 ${cnBtnDisabledSolid}`,
+  'cn-btn-success': `cn-btn !text-white [&:not(.n-button--disabled)]:!bg-success [&:not(.n-button--disabled)]:!border-success [&:not(.n-button--disabled)_.${nBtnBorder}]:!border-success hover:[&:not(.n-button--disabled)]:!opacity-90 active:[&:not(.n-button--disabled)]:!opacity-80 ${cnBtnDisabledSolid}`,
   /** 能源强调（与 success 同色实心） */
   'cn-btn-accent':
-    'cn-btn !bg-success !border !border-success !text-white hover:!opacity-90 active:!opacity-80 [&_.n-button__border]:!border-success [&_.n-button__content]:!text-white',
+    `cn-btn !bg-success !border !border-success !text-white hover:!opacity-90 active:!opacity-80 [&_.${nBtnBorder}]:!border-success [&_.${nBtnContent}]:!text-white`,
   /** 次要按钮 / 取消：灰框灰字，悬停不变，按下变实心主色 */
   'cn-btn-secondary':
     `cn-btn !bg-white !border !border-cn-border !text-cn-text-secondary hover:!bg-white hover:!border-cn-border hover:!text-cn-text-secondary active:!bg-primary-400 active:!border-primary-400 active:!text-white ${cnBtnDisabledMuted}`,
@@ -154,10 +167,6 @@ const chunengShortcuts: Record<string, string> = {
     'cn-btn !bg-white !border !border-success !text-success hover:!bg-white hover:!border-success hover:!text-success active:!bg-success/10 active:!border-success active:!text-success',
   'cn-btn-outline-success':
     'cn-btn !bg-white !border !border-success !text-success hover:!bg-white hover:!border-success hover:!text-success active:!border-success active:!text-success',
-  /** 左右间距：保存 44px / 下载打印 28px / + 新增 34px */
-  'cn-btn-px-save': '[--n-padding:0_44px]',
-  'cn-btn-px-tool': '[--n-padding:0_28px]',
-  'cn-btn-px-add': '[--n-padding:0_34px]',
   'cn-btn-industrial':
     'cn-btn !bg-cn-bg !border !border-cn-border !border-dashed !text-cn-text-secondary font-mono cn-text-base hover:!bg-cn-hover',
   'cn-btn-danger': 'cn-btn !bg-error !border !border-error !text-white hover:!opacity-90 active:!opacity-80',
@@ -178,12 +187,12 @@ const chunengShortcuts: Record<string, string> = {
   'cn-card':
     'border border-cn-border shadow-[0_1px_4px_rgb(var(--primary-color)/0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgb(var(--primary-color)/0.08)]',
   'cn-card-highlight':
-    'cn-card border-primary/20 bg-cn-bg [&_.n-card-header__main]:text-primary [&_.n-card-header__main]:font-600',
+    `cn-card border-primary/20 bg-cn-bg [&_.${nCardHeaderMain}]:text-primary [&_.${nCardHeaderMain}]:font-600`,
   'cn-card-metric': 'cn-card !border-l-3 !border-l-primary !rd-l-0 !rd-r-6px',
 
   // ---------- 弹窗 Modal / Dialog ----------
   'cn-modal':
-    `[&_.n-card]:border [&_.n-card]:border-cn-border [&_.n-card]:shadow-[0_8px_24px_rgb(var(--primary-color)/0.12)] [&_.n-card-header]:border-b [&_.n-card-header]:border-cn-border [&_.n-card-header]:pb-12px [&_.n-card-header__main]:text-primary [&_.n-card-header__main]:font-600 [&_.n-dialog__title]:text-primary [&_.n-dialog__title]:font-600 [&_.n-dialog__action]:gap-12px [&_.n-button--default-type]:!bg-white [&_.n-button--default-type]:!border-cn-border [&_.n-button--default-type]:!text-cn-text-secondary [&_.n-button--primary-type]:!text-white ${cnPrimaryFill} ${cnPrimaryHover} ${cnPrimaryPressed} ${cnBtnDisabledSolid}`,
+    `[&.n-card]:border [&.n-card]:border-cn-border [&_.n-card-header]:border-b [&_.n-card-header]:border-cn-border [&_.n-card-header]:pb-12px [&_.${nCardHeaderMain}]:!text-primary [&_.${nCardHeaderMain}]:font-600 [&_.${nDialogTitle}]:!text-primary [&_.${nDialogTitle}]:font-600 [&_.${nDialogContent}]:text-cn-text-primary [&_.${nDialogAction}]:gap-12px [&_.n-button--default-type]:!bg-white [&_.n-button--default-type]:!border-cn-border [&_.n-button--default-type]:!text-cn-text-secondary ${cnModalPrimaryBtn}`,
 
   // ---------- 输入 Input / Select（设计稿：默认灰框 / 输入中主色 / 错误红框红字） ----------
   'cn-input':

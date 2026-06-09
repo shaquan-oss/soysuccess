@@ -39,8 +39,8 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     colorDisabledPrimary: color.disabled,
     textColorDisabled: '#FFFFFF',
     textColorDisabledPrimary: '#FFFFFF',
-    borderDisabled: border(color.disabled),
-    borderDisabledPrimary: border(color.disabled),
+    borderDisabled: '1px solid transparent',
+    borderDisabledPrimary: '1px solid transparent',
     opacityDisabled: '1'
   },
   Tag: {

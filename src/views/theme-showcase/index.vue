@@ -7,7 +7,6 @@ import {
   showcaseBlueScale,
   showcaseButtonHeightSpec,
   showcaseButtonInteractionColors,
-  showcaseButtonPaddingSpec,
   showcaseChartColors,
   showcaseCodeHintClass,
   showcaseDeviceParams,
@@ -106,7 +105,6 @@ const codeHintClass = showcaseCodeHintClass;
 const buttonInteractionColors = showcaseButtonInteractionColors;
 const radiusSpec = showcaseRadiusSpec;
 const buttonHeightSpec = showcaseButtonHeightSpec;
-const buttonPaddingSpec = showcaseButtonPaddingSpec;
 </script>
 
 <template>
@@ -307,15 +305,15 @@ const buttonPaddingSpec = showcaseButtonPaddingSpec;
             <div>
               <div class="cn-text-secondary text-14px mb-8px">设计稿 · 按钮类型（搜索 / 导出 / 确定 / 取消 / 新增）</div>
               <div class="flex flex-wrap items-center gap-12px">
-                <NButton class="cn-btn cn-btn-primary cn-btn-px-tool" type="primary">搜索</NButton>
-                <NButton class="cn-btn cn-btn-primary cn-btn-px-tool" type="primary">导出</NButton>
-                <NButton class="cn-btn cn-btn-primary cn-btn-px-save" type="primary">确定</NButton>
+                <NButton class="cn-btn cn-btn-primary" type="primary">搜索</NButton>
+                <NButton class="cn-btn cn-btn-primary" type="primary">导出</NButton>
+                <NButton class="cn-btn cn-btn-primary" type="primary">确定</NButton>
                 <NButton class="cn-btn cn-btn-secondary">取消</NButton>
                 <NButton class="cn-btn cn-btn-outline">+ 新增任务</NButton>
-                <NButton class="cn-btn cn-btn-primary cn-btn-px-add" type="primary">+ 新增</NButton>
+                <NButton class="cn-btn cn-btn-primary" type="primary">+ 新增</NButton>
               </div>
               <div class="mt-8px" :class="[codeHintClass]">
-                cn-btn-primary / cn-btn-secondary / cn-btn-outline + cn-btn-px-save|tool|add
+                cn-btn-primary / cn-btn-secondary / cn-btn-outline
               </div>
             </div>
 
@@ -328,16 +326,6 @@ const buttonPaddingSpec = showcaseButtonPaddingSpec;
                 <NButton class="cn-btn cn-btn-outline-success">+ 新增任务·成功</NButton>
                 <NButton class="cn-btn cn-btn-danger" type="error">危险</NButton>
                 <NButton class="cn-btn cn-btn-warning" type="warning">警告</NButton>
-              </div>
-            </div>
-
-            <div>
-              <div class="cn-text-secondary text-14px mb-8px">左右间距规范</div>
-              <div class="flex flex-wrap items-end gap-16px">
-                <div v-for="item in buttonPaddingSpec" :key="item.label" class="flex flex-col items-center gap-6px">
-                  <NButton class="cn-btn cn-btn-primary" :class="item.shortcut" type="primary">{{ item.label }}</NButton>
-                  <span class="cn-text-sm font-mono">{{ item.px }}px · {{ item.shortcut }}</span>
-                </div>
               </div>
             </div>
 
