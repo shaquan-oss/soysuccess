@@ -455,7 +455,7 @@ const buttonPaddingSpec = showcaseButtonPaddingSpec;
                   </div>
                   <div>
                     <div class="cn-text-sm mb-8px">{{ $t('page.themeShowcase.pagination') }}</div>
-                    <NPagination v-model:page="paginationPage" :page-count="8" />
+                    <NPagination v-model:page="paginationPage" class="cn-pagination" :page-count="8" />
                   </div>
                   <div>
                     <div class="cn-text-sm mb-8px">{{ $t('page.themeShowcase.checkboxSwitch') }}</div>

@@ -13,3 +13,8 @@ html {
   overflow-x: hidden;
   color: rgb(var(--base-text-color));
 }
+
+/* Naive Select：pending 悬停只改底色，需补白字（菜单 teleport 到 body，走全局样式） */
+.n-base-select-option.n-base-select-option--pending:not(.n-base-select-option--selected) {
+  color: var(--n-option-text-color-active);
+}

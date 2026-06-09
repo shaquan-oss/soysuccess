@@ -347,6 +347,7 @@ function handleSubmitTicket() {
           :page-sizes="[10, 20, 50]"
           show-size-picker
           size="small"
+          class="cn-pagination"
         />
       </div>
     </NCard>

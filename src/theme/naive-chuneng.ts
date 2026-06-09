@@ -5,9 +5,7 @@ const { color, fontSize, radius, buttonHeight } = chunengDesignTokens;
 const r = (px: number) => `${px}px`;
 const h = (px: number) => `${px}px`;
 const border = (c: string) => `1px solid ${c}`;
-const focusRing = '0 0 0 2px rgba(0, 40, 170, 0.12)';
-
-/** 楚能 UI 设计稿 · Naive UI 组件主题覆盖 */
+/** 楚能 UI 设计稿 · Naive UI 组件主题覆盖（语义色由 getNaiveTheme 动态生成，此处仅保留结构与禁用态） */
 export const chunengNaiveOverrides: GlobalThemeOverrides = {
   common: {
     borderRadius: r(radius.sm),
@@ -19,11 +17,7 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     textColor3: color.textHint,
     borderColor: color.border,
     dividerColor: color.border,
-    hoverColor: color.rowHover,
-    primaryColor: color.primary,
-    primaryColorHover: color.primaryHover,
-    primaryColorPressed: color.primaryPressed,
-    primaryColorSuppl: color.primaryPressed
+    hoverColor: color.rowHover
   },
   Button: {
     borderRadiusMedium: r(radius.sm),
@@ -37,18 +31,10 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     paddingSmall: '0 12px',
     paddingLarge: '0 20px',
     fontSizeMedium: `${fontSize.base}px`,
-    colorPrimary: color.primary,
-    colorHoverPrimary: color.primaryHover,
-    colorPressedPrimary: color.primaryPressed,
-    colorFocusPrimary: color.primary,
     textColorPrimary: '#FFFFFF',
     textColorHoverPrimary: '#FFFFFF',
     textColorPressedPrimary: '#FFFFFF',
     textColorFocusPrimary: '#FFFFFF',
-    borderPrimary: border(color.primary),
-    borderHoverPrimary: border(color.primaryHover),
-    borderPressedPrimary: border(color.primaryPressed),
-    borderFocusPrimary: border(color.primary),
     colorDisabled: color.disabled,
     colorDisabledPrimary: color.disabled,
     textColorDisabled: '#FFFFFF',
@@ -91,13 +77,7 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     heightMedium: h(buttonHeight.medium),
     heightSmall: h(buttonHeight.small),
     heightLarge: h(buttonHeight.large),
-    fontSizeMedium: `${fontSize.base}px`,
-    border: border(color.border),
-    borderHover: border(color.primaryHover),
-    borderFocus: border(color.primary),
-    boxShadowFocus: focusRing,
-    caretColor: color.primary,
-    colorFocus: '#FFFFFF'
+    fontSizeMedium: `${fontSize.base}px`
   },
   Select: {
     borderRadius: r(radius.sm),
@@ -107,21 +87,10 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
         heightMedium: h(buttonHeight.medium),
         heightSmall: h(buttonHeight.small),
         heightLarge: h(buttonHeight.large),
-        fontSizeMedium: `${fontSize.base}px`,
-        border: border(color.border),
-        borderHover: border(color.primaryHover),
-        borderActive: border(color.primary),
-        borderFocus: border(color.primary),
-        boxShadowFocus: focusRing,
-        caretColor: color.primary
+        fontSizeMedium: `${fontSize.base}px`
       },
       InternalSelectMenu: {
-        borderRadius: r(radius.md),
-        optionColorActive: color.primary,
-        optionTextColorActive: '#FFFFFF',
-        optionColorActivePending: color.primaryHover,
-        optionColorPending: color.rowHover,
-        optionCheckColor: '#FFFFFF'
+        borderRadius: r(radius.md)
       }
     }
   },
@@ -157,9 +126,7 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
   Switch: {
     railBorderRadiusSmall: r(radius.sm),
     railBorderRadiusMedium: r(radius.md),
-    railBorderRadiusLarge: r(radius.md),
-    railColorActive: color.primary,
-    boxShadowFocus: focusRing
+    railBorderRadiusLarge: r(radius.md)
   },
   Message: {
     borderRadius: r(radius.sm)
@@ -167,27 +134,12 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
   Notification: {
     borderRadius: r(radius.md)
   },
-  Pagination: {
-    buttonBorder: border(color.border),
-    itemBorder: border(color.border),
-    itemBorderRadius: r(radius.sm),
-    itemColorActive: color.primary,
-    itemTextColorActive: '#FFFFFF',
-    itemBorderActive: border(color.primary),
-    itemColorActiveHover: color.primaryHover,
-    itemTextColorHover: color.primary
-  },
   Checkbox: {
     borderRadius: r(radius.sm),
-    colorChecked: color.primary,
-    borderChecked: border(color.primary),
-    borderFocus: border(color.primary),
-    boxShadowFocus: focusRing,
     checkMarkColor: '#FFFFFF'
   },
   Scrollbar: {
     color: color.border,
-    colorHover: color.primaryHover,
     width: '6px',
     height: '6px',
     borderRadius: '3px'

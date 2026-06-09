@@ -4,8 +4,11 @@ import { addColorAlpha, getColorPalette, getPaletteColorByNumber, getRgb } from 
 import { DARK_CLASS } from '@/constants/app';
 import { toggleHtmlClass } from '@/utils/common';
 import { localStg } from '@/utils/storage';
+import { chunengDesignTokens } from '@/theme/design-tokens';
 import { overrideThemeSettings, themeSettings } from '@/theme/settings';
 import { themeVars } from '@/theme/vars';
+
+const cnBorder = (color: string) => `1px solid ${color}`;
 
 /** Init theme settings */
 export function initThemeSettings() {
@@ -246,10 +249,15 @@ export function getNaiveTheme(
   overrides?: GlobalThemeOverrides
 ) {
   const { primary: colorLoading } = colors;
+  const recommend = settings.recommendColor;
+  const { color: cnColor, radius } = chunengDesignTokens;
+  const primaryHover = getPaletteColorByNumber(colors.primary, 400, recommend);
+  const primaryFocusRing = `0 0 0 2px ${addColorAlpha(colors.primary, 0.12)}`;
+  const errorFocusRing = `0 0 0 2px ${addColorAlpha(colors.error, 0.12)}`;
 
   const theme: GlobalThemeOverrides = {
     common: {
-      ...getNaiveThemeColors(colors, settings.recommendColor),
+      ...getNaiveThemeColors(colors, recommend),
       borderRadius: `${settings.themeRadius}px`
     },
     LoadingBar: {
@@ -257,6 +265,53 @@ export function getNaiveTheme(
     },
     Tag: {
       borderRadius: `${settings.themeRadius}px`
+    },
+    /** 设计稿：默认灰框 / 输入中主色边框 / 错误红框红字 */
+    Input: {
+      border: cnBorder(cnColor.border),
+      borderHover: cnBorder(primaryHover),
+      borderFocus: cnBorder(colors.primary),
+      borderError: cnBorder(colors.error),
+      boxShadowFocus: primaryFocusRing,
+      caretColor: colors.primary,
+      colorFocus: '#FFFFFF',
+      colorError: '#FFFFFF',
+      textColorError: colors.error
+    },
+    /** 设计稿：已选主色边框；下拉项悬停/选中实心主色底白字 */
+    Select: {
+      peers: {
+        InternalSelection: {
+          border: cnBorder(cnColor.border),
+          borderHover: cnBorder(primaryHover),
+          borderActive: cnBorder(colors.primary),
+          borderFocus: cnBorder(colors.primary),
+          boxShadowFocus: primaryFocusRing,
+          caretColor: colors.primary
+        },
+        InternalSelectMenu: {
+          optionColorActive: colors.primary,
+          optionTextColorActive: '#FFFFFF',
+          optionColorActivePending: primaryHover,
+          optionColorPending: colors.primary,
+          optionTextColorPressed: '#FFFFFF',
+          optionCheckColor: '#FFFFFF'
+        }
+      }
+    },
+    /** 设计稿：当前页主色描边 + 白底 + 主色数字 */
+    Pagination: {
+      itemBorder: cnBorder(cnColor.border),
+      buttonBorder: cnBorder(cnColor.border),
+      itemColor: '#FFFFFF',
+      itemColorHover: cnColor.bgPage,
+      itemTextColor: cnColor.textPrimary,
+      itemColorActive: '#FFFFFF',
+      itemTextColorActive: colors.primary,
+      itemBorderActive: cnBorder(colors.primary),
+      itemColorActiveHover: '#FFFFFF',
+      itemTextColorHover: colors.primary,
+      itemBorderRadius: `${radius.sm}px`
     }
   };
 

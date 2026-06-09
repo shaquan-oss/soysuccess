@@ -59,6 +59,7 @@ export default defineConfig({
     'cn-alert-industrial',
     'cn-input',
     'cn-input-industrial',
+    'cn-pagination',
     'cn-table',
     'cn-badge',
     'cn-page',
@@ -97,9 +98,17 @@ export default defineConfig({
     'text-cn-text-secondary',
     'text-cn-text-hint',
     'text-cn-success',
-    'bg-cn-success',
-    'text-cn-info',
-    'bg-cn-blue-hover'
+    'bg-success',
+    'text-info',
+    'bg-primary',
+    'bg-primary-400',
+    'bg-primary-600',
+    'border-primary',
+    'border-primary-400',
+    'border-primary-600',
+    'text-primary',
+    'text-primary-400',
+    'text-primary-600'
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   presets: [presetWind3({ dark: 'class' }), presetSoybeanAdmin(), presetChuneng()]
