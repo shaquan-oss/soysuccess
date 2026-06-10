@@ -2,14 +2,16 @@ import type { GlobalThemeOverrides } from 'naive-ui';
 import { chunengDesignTokens } from './design-tokens';
 
 const { color, fontSize, radius, buttonHeight } = chunengDesignTokens;
-const r = (px: number) => `${px}px`;
-const h = (px: number) => `${px}px`;
-const border = (c: string) => `1px solid ${c}`;
-/** 楚能 UI 设计稿 · Naive UI 组件主题覆盖（语义色由 getNaiveTheme 动态生成，此处仅保留结构与禁用态） */
+const px = (n: number) => `${n}px`;
+
+/**
+ * 楚能 UI · Naive UI 结构覆盖
+ * 语义色与交互色由 getNaiveTheme 动态注入，此处仅保留尺寸、圆角、禁用态等静态结构
+ */
 export const chunengNaiveOverrides: GlobalThemeOverrides = {
   common: {
-    borderRadius: r(radius.sm),
-    borderRadiusSmall: r(radius.sm),
+    borderRadius: px(radius.sm),
+    borderRadiusSmall: px(radius.sm),
     fontWeightStrong: '600',
     lineHeight: '1.43',
     textColor1: color.textPrimary,
@@ -17,16 +19,17 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     textColor3: color.textHint,
     borderColor: color.border,
     dividerColor: color.border,
-    hoverColor: color.rowHover
+    hoverColor: color.rowHover,
+    bodyColor: color.bgPage
   },
   Button: {
-    borderRadiusMedium: r(radius.sm),
-    borderRadiusSmall: r(radius.sm),
-    borderRadiusLarge: r(radius.sm),
+    borderRadiusMedium: px(radius.sm),
+    borderRadiusSmall: px(radius.sm),
+    borderRadiusLarge: px(radius.sm),
     fontWeightStrong: '600',
-    heightMedium: h(buttonHeight.medium),
-    heightSmall: h(buttonHeight.small),
-    heightLarge: h(buttonHeight.large),
+    heightMedium: px(buttonHeight.medium),
+    heightSmall: px(buttonHeight.small),
+    heightLarge: px(buttonHeight.large),
     paddingMedium: '0 16px',
     paddingSmall: '0 12px',
     paddingLarge: '0 20px',
@@ -43,73 +46,30 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     borderDisabledPrimary: '1px solid transparent',
     opacityDisabled: '1'
   },
-  Tag: {
-    borderRadius: r(radius.sm),
-    heightMedium: '24px',
-    fontWeightStrong: '600',
-    fontSizeMedium: `${fontSize.sm}px`
-  },
-  Card: {
-    borderRadius: r(radius.md),
-    paddingMedium: '16px',
-    titleFontWeight: '600',
-    titleFontSize: `${fontSize.md}px`,
-    color: color.bgPage,
-    borderColor: color.border
-  },
-  Dialog: {
-    borderRadius: r(radius.md),
-    padding: '20px 24px',
-    titleFontSize: `${fontSize.md}px`,
-    titleFontWeight: '600'
-  },
-  Modal: {
-    borderRadius: r(radius.md)
-  },
-  Popover: {
-    borderRadius: r(radius.md)
-  },
-  Dropdown: {
-    borderRadius: r(radius.md)
-  },
   Input: {
-    borderRadius: r(radius.sm),
-    heightMedium: h(buttonHeight.medium),
-    heightSmall: h(buttonHeight.small),
-    heightLarge: h(buttonHeight.large),
+    borderRadius: px(radius.sm),
+    heightMedium: px(buttonHeight.medium),
+    heightSmall: px(buttonHeight.small),
+    heightLarge: px(buttonHeight.large),
     fontSizeMedium: `${fontSize.base}px`
   },
   Select: {
-    borderRadius: r(radius.sm),
+    borderRadius: px(radius.sm),
     peers: {
       InternalSelection: {
-        borderRadius: r(radius.sm),
-        heightMedium: h(buttonHeight.medium),
-        heightSmall: h(buttonHeight.small),
-        heightLarge: h(buttonHeight.large),
+        borderRadius: px(radius.sm),
+        heightMedium: px(buttonHeight.medium),
+        heightSmall: px(buttonHeight.small),
+        heightLarge: px(buttonHeight.large),
         fontSizeMedium: `${fontSize.base}px`
       },
       InternalSelectMenu: {
-        borderRadius: r(radius.md)
+        borderRadius: px(radius.md)
       }
     }
   },
-  Alert: {
-    borderRadius: r(radius.sm),
-    padding: '12px 16px',
-    titleFontWeight: '600',
-    fontSize: `${fontSize.base}px`
-  },
-  Badge: {
-    borderRadius: r(radius.sm)
-  },
-  Tabs: {
-    tabBorderRadius: r(radius.sm),
-    tabFontWeightActive: '600',
-    tabFontSizeMedium: `${fontSize.base}px`
-  },
   DataTable: {
-    borderRadius: r(radius.md),
+    borderRadius: px(radius.md),
     thFontWeight: '600',
     thPaddingMedium: '12px 16px',
     tdPaddingMedium: '12px 16px',
@@ -119,29 +79,25 @@ export const chunengNaiveOverrides: GlobalThemeOverrides = {
     borderColor: color.border,
     fontSizeMedium: `${fontSize.base}px`
   },
-  Progress: {
-    railRadius: r(radius.sm),
-    fillRadius: r(radius.sm)
+  Tabs: {
+    tabFontWeightActive: '600',
+    tabFontSizeMedium: `${fontSize.base}px`
   },
-  Switch: {
-    railBorderRadiusSmall: r(radius.sm),
-    railBorderRadiusMedium: r(radius.md),
-    railBorderRadiusLarge: r(radius.md)
+  Dialog: {
+    borderRadius: px(radius.md),
+    padding: '20px 24px',
+    titleFontSize: `${fontSize.md}px`,
+    titleFontWeight: '600'
   },
-  Message: {
-    borderRadius: r(radius.sm)
-  },
-  Notification: {
-    borderRadius: r(radius.md)
+  Modal: {
+    borderRadius: px(radius.md)
   },
   Checkbox: {
-    borderRadius: r(radius.sm),
+    borderRadius: px(radius.sm),
     checkMarkColor: '#FFFFFF'
   },
-  Scrollbar: {
-    color: color.border,
-    width: '6px',
-    height: '6px',
-    borderRadius: '3px'
+  Switch: {
+    railBorderRadiusSmall: px(radius.sm),
+    railBorderRadiusMedium: px(radius.md)
   }
 };

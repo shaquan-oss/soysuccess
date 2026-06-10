@@ -251,20 +251,48 @@ export function getNaiveTheme(
   const { primary: colorLoading } = colors;
   const recommend = settings.recommendColor;
   const { color: cnColor, radius } = chunengDesignTokens;
-  const primaryHover = getPaletteColorByNumber(colors.primary, 400, recommend);
+  const primaryHover = recommend ? getPaletteColorByNumber(colors.primary, 400, true) : cnColor.primaryHover;
+  const primaryPressed = recommend ? getPaletteColorByNumber(colors.primary, 600, true) : cnColor.primaryPressed;
   const primaryFocusRing = `0 0 0 2px ${addColorAlpha(colors.primary, 0.12)}`;
-  const errorFocusRing = `0 0 0 2px ${addColorAlpha(colors.error, 0.12)}`;
 
   const theme: GlobalThemeOverrides = {
     common: {
       ...getNaiveThemeColors(colors, recommend),
-      borderRadius: `${settings.themeRadius}px`
+      borderRadius: `${settings.themeRadius}px`,
+      primaryColorHover: primaryHover,
+      primaryColorPressed: primaryPressed
     },
     LoadingBar: {
       colorLoading
     },
     Tag: {
       borderRadius: `${settings.themeRadius}px`
+    },
+    /** 设计稿按钮：主色 hover/pressed；默认按钮按下变主色实心 */
+    Button: {
+      colorHoverPrimary: primaryHover,
+      colorPressedPrimary: primaryPressed,
+      color: '#FFFFFF',
+      colorHover: '#FFFFFF',
+      colorPressed: colors.primary,
+      textColor: cnColor.textSecondary,
+      textColorHover: cnColor.textSecondary,
+      textColorPressed: '#FFFFFF',
+      border: cnBorder(cnColor.border),
+      borderHover: cnBorder(cnColor.border),
+      borderPressed: cnBorder(colors.primary),
+      colorTertiary: '#FFFFFF',
+      colorHoverTertiary: '#FFFFFF',
+      textColorTertiary: colors.primary,
+      textColorHoverTertiary: primaryHover,
+      textColorPressedTertiary: primaryPressed,
+      borderTertiary: cnBorder(colors.primary),
+      borderHoverTertiary: cnBorder(primaryHover),
+      borderPressedTertiary: cnBorder(primaryPressed)
+    },
+    Card: {
+      titleTextColor: colors.primary,
+      titleFontWeight: '600'
     },
     /** 设计稿：默认灰框 / 输入中主色边框 / 错误红框红字 */
     Input: {
@@ -298,6 +326,10 @@ export function getNaiveTheme(
           optionCheckColor: '#FFFFFF'
         }
       }
+    },
+    Dialog: {
+      titleTextColor: colors.primary,
+      titleFontWeight: '600'
     },
     /** 设计稿：当前页主色描边 + 白底 + 主色数字 */
     Pagination: {

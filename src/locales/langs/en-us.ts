@@ -325,13 +325,13 @@ const local: App.I18n.Schema = {
       generalColors: 'General UI Colors',
       controls: {
         radius: 'Border Radius',
-        radiusHint:
-          '3 levels: large module 10px · modal/card 6px · button/tag 4px (Naive overrides + cn-rd-* shortcuts)',
+        radiusHint: '3 levels: large module 10px · modal/card 6px · button/tag 4px (Naive theme + rd-cn-* utilities)',
         buttonHeight: 'Button Height',
         buttonHeightHint: 'Small 32px · Medium 36px (default) · Large 48px — applied via naive-chuneng global overrides'
       },
       buttonVariants: 'Button Styles',
-      buttonHint: 'Add cn-* UnoCSS shortcut class to Naive UI components to apply industrial style',
+      buttonHint:
+        'Use Naive UI components directly: type="primary" / type="default" / tertiary — theme handles styling',
       deviceStatusTags: 'Device Status Tags (Battery Industry)',
       tagHint: 'For BMS / PCS / production line device status',
       alerts: 'Alert',
@@ -342,33 +342,11 @@ const local: App.I18n.Schema = {
       progress: 'Progress / Badge',
       modal: 'Modal / Dialog',
       table: 'DataTable',
-      pageLayout: {
-        pageHeader: 'Page Header cn-page-header',
-        pageHeaderHint: 'Top of list/detail page: title on left, actions on right',
-        toolbar: 'Filter Bar cn-toolbar',
-        toolbarHint: 'Above table: search, filters, query/reset buttons',
-        statRow: 'KPI Row cn-stat-row',
-        statRowHint: 'Dashboard top metrics, responsive 1→2→4 cols, use with cn-card-metric',
-        kvGrid: 'KV Grid cn-kv-grid',
-        kvGridHint: 'Device detail panel: label + value pairs, monospace values for numbers',
-        statusDot: 'Status Dot cn-status-dot',
-        statusDotHint: 'Lightweight running/alarm/offline indicator in lists or detail',
-        sectionTitle: 'Section Title cn-section-title',
-        sectionTitleHint: 'Sub-headings in forms, charts, cards with brand accent bar',
-        chartWrap: 'Chart Container cn-chart-wrap',
-        chartWrapHint: 'ECharts mount area with min-height 360px',
-        empty: 'Empty State cn-empty',
-        emptyHint: 'Placeholder when no data, no alerts, or no search results',
-        fullPage: 'Full Page cn-page',
-        fullPageHint: 'Typical business page combining all layout classes above'
-      },
       industrial: {
         charts: 'Industrial Charts (ECharts)',
         chartsHint: 'Design palette for SOC trend, production, online rate, alarm distribution',
         scrollbar: 'Industrial Scrollbar cn-scrollbar',
-        scrollbarHint: 'Thin scrollbar with brand-blue hover for scrollable lists',
-        monitor: 'Monitor Panel Demo',
-        monitorHint: 'KPI + KV grid using design tokens for bg/border/hover'
+        scrollbarHint: 'Thin scrollbar with brand-blue hover for scrollable lists'
       },
       ems: {
         title: 'EMS Business Scenarios',
@@ -380,7 +358,6 @@ const local: App.I18n.Schema = {
         tags: 'Tags',
         feedback: 'Feedback',
         layout: 'Cards & Modal',
-        pageLayout: 'Page Layout',
         industrial: 'Industrial Charts',
         ems: 'EMS Business'
       }

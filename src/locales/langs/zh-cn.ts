@@ -321,13 +321,13 @@ const local: App.I18n.Schema = {
       generalColors: '一般 UI 色',
       controls: {
         radius: '圆角规范',
-        radiusHint: '三级圆角：大模块 10px · 小模块/弹窗 6px · 按钮/标签 4px（Naive 覆盖 + cn-rd-* shortcuts）',
+        radiusHint: '三级圆角：大模块 10px · 小模块/弹窗 6px · 按钮/标签 4px（Naive 主题 + rd-cn-* 原子类）',
         buttonHeight: '按钮高度',
         buttonHeightHint:
           'Small 32px（表格行内）· Medium 36px（默认）· Large 48px（重点主操作），由 naive-chuneng 全局覆盖'
       },
       buttonVariants: '按钮样式',
-      buttonHint: '在 Naive UI 组件上添加 cn-* UnoCSS shortcut class 即可应用楚能工业风格',
+      buttonHint: '直接使用 Naive UI 组件即可：type="primary" / type="default" / tertiary，样式由主题全局覆盖',
       deviceStatusTags: '设备状态标签（电芯行业语义）',
       tagHint: '适用于 BMS / PCS / 产线设备状态展示',
       alerts: '提示 Alert',
@@ -338,33 +338,11 @@ const local: App.I18n.Schema = {
       progress: '进度 Progress / Badge',
       modal: '弹窗 Modal / Dialog',
       table: '表格 DataTable',
-      pageLayout: {
-        pageHeader: '页头 cn-page-header',
-        pageHeaderHint: '列表页/详情页顶部：左侧标题 + 右侧操作区',
-        toolbar: '筛选栏 cn-toolbar',
-        toolbarHint: '表格上方：搜索、下拉筛选、查询/重置按钮',
-        statRow: '指标行 cn-stat-row',
-        statRowHint: 'Dashboard 顶部 KPI 卡片区，响应式 1→2→4 列，配合 cn-card-metric',
-        kvGrid: '参数网格 cn-kv-grid',
-        kvGridHint: '设备详情、监测面板：label + value 键值对，value 使用等宽字体',
-        statusDot: '状态圆点 cn-status-dot',
-        statusDotHint: '列表/详情中的运行、告警、离线状态指示，比 Tag 更轻量',
-        sectionTitle: '区块标题 cn-section-title',
-        sectionTitleHint: '表单分组、图表区、卡片内的小标题，带品牌色竖线',
-        chartWrap: '图表容器 cn-chart-wrap',
-        chartWrapHint: 'ECharts 挂载区域，固定最小高度 360px',
-        empty: '空状态 cn-empty',
-        emptyHint: '无数据、无告警、搜索无结果时的占位区域',
-        fullPage: '完整页面组合 cn-page',
-        fullPageHint: '将以上 layout class 组合使用的典型业务页结构'
-      },
       industrial: {
         charts: '工业图表（ECharts）',
         chartsHint: '使用设计稿辅配色，适用于 SOC 趋势、产量、在线率、告警分布',
         scrollbar: '工业风滚动条 cn-scrollbar',
-        scrollbarHint: '细滚动条 + 悬停变品牌蓝，列表区域可滚动浏览设备',
-        monitor: '监测面板示例',
-        monitorHint: 'KPI + 参数网格，背景/边框/悬停色均来自设计稿'
+        scrollbarHint: '细滚动条 + 悬停变品牌蓝，列表区域可滚动浏览设备'
       },
       ems: {
         title: 'EMS 能源管理业务场景',
@@ -376,7 +354,6 @@ const local: App.I18n.Schema = {
         tags: '标签',
         feedback: '表单反馈',
         layout: '卡片弹窗',
-        pageLayout: '页面布局',
         industrial: '工业图表',
         ems: 'EMS 业务'
       }

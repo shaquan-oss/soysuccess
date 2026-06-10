@@ -31,12 +31,18 @@ interface AlarmLogItem {
 }
 
 const statusTagMap: Record<DeviceStatus, { class: string; label: string }> = {
-  running: { class: 'cn-tag cn-tag-running', label: '运行中' },
-  charging: { class: 'cn-tag cn-tag-charging', label: '充电中' },
-  discharging: { class: 'cn-tag cn-tag-discharging', label: '放电中' },
-  alarm: { class: 'cn-tag cn-tag-alarm', label: '告警' },
-  offline: { class: 'cn-tag cn-tag-offline', label: '离线' },
-  maintenance: { class: 'cn-tag cn-tag-maintenance', label: '维护中' }
+  running: { class: 'cn-tag-running', label: '运行中' },
+  charging: { class: 'cn-tag-charging', label: '充电中' },
+  discharging: {
+    class: 'text-cn-sm font-600 !bg-warning/12 !border !border-warning/35 !text-warning',
+    label: '放电中'
+  },
+  alarm: { class: 'cn-tag-alarm', label: '告警' },
+  offline: { class: 'cn-tag-offline', label: '离线' },
+  maintenance: {
+    class: 'text-cn-sm font-600 !bg-info/10 !border !border-info/30 !text-info',
+    label: '维护中'
+  }
 };
 
 const stationFilter = ref<string | null>(null);
@@ -206,8 +212,8 @@ const deviceColumns: DataTableColumns<StationDeviceRow> = [
     fixed: 'right',
     render: () =>
       h('div', { class: 'flex gap-8px' }, [
-        h('span', { class: 'text-cn-blue-100 cursor-pointer cn-text-sm' }, '详情'),
-        h('span', { class: 'text-cn-info cursor-pointer cn-text-sm' }, '遥控')
+        h('span', { class: 'text-cn-blue-100 cursor-pointer text-cn-sm' }, '详情'),
+        h('span', { class: 'text-cn-info cursor-pointer text-cn-sm' }, '遥控')
       ])
   }
 ];
@@ -221,9 +227,15 @@ const alarmLogs: AlarmLogItem[] = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 const alarmLevelTag: Record<AlarmLogItem['level'], { class: string; label: string }> = {
-  critical: { class: 'cn-tag cn-tag-alarm', label: '严重' },
-  warning: { class: 'cn-tag cn-tag-discharging', label: '预警' },
-  info: { class: 'cn-tag cn-tag-maintenance', label: '提示' }
+  critical: { class: 'cn-tag-alarm', label: '严重' },
+  warning: {
+    class: 'text-cn-sm font-600 !bg-warning/12 !border !border-warning/35 !text-warning',
+    label: '预警'
+  },
+  info: {
+    class: 'text-cn-sm font-600 !bg-info/10 !border !border-info/30 !text-info',
+    label: '提示'
+  }
 };
 
 const formRef = ref<FormInst | null>(null);
@@ -251,22 +263,27 @@ const pcsForm = ref({
 });
 
 const colorAudit = [
-  { scene: '主要按钮', token: 'primary', hex: chunengDesignTokens.color.primary, shortcut: 'cn-btn-primary' },
+  { scene: '主要按钮', token: 'primary', hex: chunengDesignTokens.color.primary, shortcut: 'type="primary"' },
   {
     scene: '能源强调 / 成功',
     token: 'success',
     hex: chunengDesignTokens.color.success,
-    shortcut: 'cn-btn-accent / cn-tag-running'
+    shortcut: 'type="success" / cn-tag-running'
   },
   {
     scene: '警告',
     token: 'warning',
     hex: chunengDesignTokens.color.warning,
-    shortcut: 'cn-btn-warning / cn-tag-discharging'
+    shortcut: 'type="warning" / !bg-warning/12 !text-warning'
   },
-  { scene: '危险', token: 'error', hex: chunengDesignTokens.color.error, shortcut: 'cn-btn-danger / cn-tag-alarm' },
-  { scene: '信息 / 维护', token: 'info', hex: chunengDesignTokens.color.info, shortcut: 'cn-tag-maintenance' },
-  { scene: '能源正常', token: 'green-100', hex: '#04CE19', shortcut: 'cn-tag-energy' }
+  { scene: '危险', token: 'error', hex: chunengDesignTokens.color.error, shortcut: 'type="error" / cn-tag-alarm' },
+  {
+    scene: '信息 / 维护',
+    token: 'info',
+    hex: chunengDesignTokens.color.info,
+    shortcut: 'text-cn-sm font-600 !bg-info/10 !text-info'
+  },
+  { scene: '能源正常', token: 'green-100', hex: '#04CE19', shortcut: '!bg-cn-green-100/12 !text-cn-green-aux' }
 ];
 
 function handleSearch() {
@@ -288,12 +305,12 @@ function handleSubmitTicket() {
 <template>
   <NSpace vertical :size="16">
     <!-- 色值对照（EMS 业务常用） -->
-    <NCard :bordered="false" class="cn-card card-wrapper">
-      <div class="cn-section-title mb-12px">EMS 语义色对照（设计稿 v2）</div>
+    <NCard :bordered="false" class="card-wrapper">
+      <div class="text-cn-md font-600 mb-12px">EMS 语义色对照（设计稿 v2）</div>
       <div class="grid grid-cols-2 s:grid-cols-3 l:grid-cols-6 gap-12px">
-        <div v-for="item in colorAudit" :key="item.shortcut" class="cn-industrial-panel p-12px">
+        <div v-for="item in colorAudit" :key="item.shortcut" class="rd-cn-md bg-cn-bg border border-cn-border p-12px">
           <div class="size-28px rd-4px mb-8px border border-cn-border" :style="{ backgroundColor: item.hex }" />
-          <div class="cn-text-sm font-600">{{ item.scene }}</div>
+          <div class="text-cn-sm font-600">{{ item.scene }}</div>
           <div class="font-mono text-10px text-cn-text-hint mt-4px">{{ item.hex }}</div>
           <div class="font-mono text-10px text-cn-text-hint">{{ item.shortcut }}</div>
         </div>
@@ -301,15 +318,15 @@ function handleSubmitTicket() {
     </NCard>
 
     <!-- 储能站设备监测表 -->
-    <NCard :bordered="false" class="cn-card card-wrapper">
-      <div class="cn-section-title mb-12px">储能站设备监测表</div>
-      <p class="cn-text-sm mb-12px">典型 EMS 列表页：筛选栏 + cn-table + 分页，状态列使用 cn-tag-* 语义标签</p>
+    <NCard :bordered="false" class="card-wrapper">
+      <div class="text-cn-md font-600 mb-12px">储能站设备监测表</div>
+      <p class="text-cn-sm text-cn-text-hint mb-12px">典型 EMS 列表页：筛选栏 + 分页，状态列使用 cn-tag-* 语义标签</p>
 
-      <div class="cn-toolbar mb-12px">
-        <NInput v-model:value="keyword" class="cn-input w-180px" placeholder="设备编号 / 类型" size="small" clearable />
+      <div class="flex flex-wrap items-center gap-12px p-12px rd-cn-md bg-container border border-cn-border mb-12px">
+        <NInput v-model:value="keyword" class="w-180px" placeholder="设备编号 / 类型" size="small" clearable />
         <NSelect
           v-model:value="stationFilter"
-          class="cn-select w-200px"
+          class="w-200px"
           :options="stationOptions"
           placeholder="储能站"
           size="small"
@@ -317,19 +334,19 @@ function handleSubmitTicket() {
         />
         <NSelect
           v-model:value="statusFilter"
-          class="cn-select w-140px"
+          class="w-140px"
           :options="statusOptions"
           placeholder="运行状态"
           size="small"
           clearable
         />
         <div class="flex-1" />
-        <NButton class="cn-btn cn-btn-ghost" size="small" @click="handleResetFilters">重置</NButton>
-        <NButton class="cn-btn cn-btn-primary" type="primary" size="small" @click="handleSearch">查询</NButton>
-        <NButton class="cn-btn cn-btn-accent" type="success" size="small">导出</NButton>
+        <NButton type="default" size="small" @click="handleResetFilters">重置</NButton>
+        <NButton type="primary" size="small" @click="handleSearch">查询</NButton>
+        <NButton type="success" size="small">导出</NButton>
       </div>
 
-      <div class="cn-table">
+      <div>
         <NDataTable
           :columns="deviceColumns"
           :data="pagedDevices"
@@ -347,7 +364,6 @@ function handleSubmitTicket() {
           :page-sizes="[10, 20, 50]"
           show-size-picker
           size="small"
-          class="cn-pagination"
         />
       </div>
     </NCard>
@@ -355,21 +371,20 @@ function handleSubmitTicket() {
     <NGrid cols="1 l:2" :x-gap="16" :y-gap="16" responsive="screen">
       <!-- 告警工单表单 -->
       <NGi>
-        <NCard :bordered="false" class="cn-card card-wrapper">
-          <div class="cn-section-title mb-12px">告警工单处置表单</div>
-          <p class="cn-text-sm mb-16px">告警闭环：工单信息 + 处置人 + 方案说明</p>
+        <NCard :bordered="false" class="card-wrapper">
+          <div class="text-cn-md font-600 mb-12px">告警工单处置表单</div>
+          <p class="text-cn-sm text-cn-text-hint mb-16px">告警闭环：工单信息 + 处置人 + 方案说明</p>
           <NForm ref="formRef" :model="ticketForm" :rules="ticketRules" label-placement="top" size="small">
             <NGrid cols="2" :x-gap="16" :y-gap="0">
               <NFormItemGi span="2" label="工单标题">
-                <NInput v-model:value="ticketForm.title" class="cn-input" />
+                <NInput v-model:value="ticketForm.title" />
               </NFormItemGi>
               <NFormItemGi label="所属储能站">
-                <NSelect v-model:value="ticketForm.station" class="cn-select" :options="stationOptions" />
+                <NSelect v-model:value="ticketForm.station" :options="stationOptions" />
               </NFormItemGi>
               <NFormItemGi label="告警等级">
                 <NSelect
                   v-model:value="ticketForm.level"
-                  class="cn-select"
                   :options="[
                     { label: '严重', value: 'critical' },
                     { label: '预警', value: 'warning' },
@@ -378,27 +393,28 @@ function handleSubmitTicket() {
                 />
               </NFormItemGi>
               <NFormItemGi span="2" label="处置人" path="handler">
-                <NInput v-model:value="ticketForm.handler" class="cn-input" placeholder="请输入处置人姓名" />
+                <NInput v-model:value="ticketForm.handler" placeholder="请输入处置人姓名" />
               </NFormItemGi>
               <NFormItemGi span="2" label="处置方案" path="plan">
                 <NInput
                   v-model:value="ticketForm.plan"
-                  class="cn-input"
                   type="textarea"
                   placeholder="如：远程降功率 → 现场巡检 → 复测确认"
                   :rows="3"
                 />
               </NFormItemGi>
               <NFormItemGi span="2" label="备注">
-                <NInput v-model:value="ticketForm.remark" class="cn-input cn-input-industrial" placeholder="可选" />
+                <NInput
+                  v-model:value="ticketForm.remark"
+                  class="[&_.n-input]:bg-cn-bg [&_.n-input]:font-mono"
+                  placeholder="可选"
+                />
               </NFormItemGi>
             </NGrid>
             <div class="flex justify-end gap-8px mt-8px">
-              <NButton class="cn-btn cn-btn-ghost" size="small">暂存</NButton>
-              <NButton class="cn-btn cn-btn-danger" type="error" size="small">驳回</NButton>
-              <NButton class="cn-btn cn-btn-primary" type="primary" size="small" @click="handleSubmitTicket">
-                提交闭环
-              </NButton>
+              <NButton type="default" size="small">暂存</NButton>
+              <NButton type="error" size="small">驳回</NButton>
+              <NButton type="primary" size="small" @click="handleSubmitTicket">提交闭环</NButton>
             </div>
           </NForm>
         </NCard>
@@ -406,23 +422,22 @@ function handleSubmitTicket() {
 
       <!-- PCS 参数配置 -->
       <NGi>
-        <NCard :bordered="false" class="cn-card card-wrapper">
-          <div class="cn-section-title mb-12px">PCS 运行参数配置</div>
-          <p class="cn-text-sm mb-16px">EMS 策略下发：数值输入 + 开关 + 只读监测项</p>
+        <NCard :bordered="false" class="card-wrapper">
+          <div class="text-cn-md font-600 mb-12px">PCS 运行参数配置</div>
+          <p class="text-cn-sm text-cn-text-hint mb-16px">EMS 策略下发：数值输入 + 开关 + 只读监测项</p>
           <NForm :model="pcsForm" label-placement="left" label-width="120" size="small">
             <NFormItem label="额定功率 (kW)">
-              <NInputNumber v-model:value="pcsForm.ratedPower" class="w-full cn-input" :min="0" :step="100" />
+              <NInputNumber v-model:value="pcsForm.ratedPower" class="w-full" :min="0" :step="100" />
             </NFormItem>
             <NFormItem label="最大充电 (kW)">
-              <NInputNumber v-model:value="pcsForm.maxCharge" class="w-full cn-input" :min="0" :step="50" />
+              <NInputNumber v-model:value="pcsForm.maxCharge" class="w-full" :min="0" :step="50" />
             </NFormItem>
             <NFormItem label="最大放电 (kW)">
-              <NInputNumber v-model:value="pcsForm.maxDischarge" class="w-full cn-input" :min="0" :step="50" />
+              <NInputNumber v-model:value="pcsForm.maxDischarge" class="w-full" :min="0" :step="50" />
             </NFormItem>
             <NFormItem label="并网模式">
               <NSelect
                 v-model:value="pcsForm.gridMode"
-                class="cn-select"
                 :options="[
                   { label: '并网', value: '并网' },
                   { label: '离网', value: '离网' },
@@ -434,23 +449,23 @@ function handleSubmitTicket() {
               <NSwitch v-model:value="pcsForm.autoDispatch" />
             </NFormItem>
             <NFormItem label="策略备注">
-              <NInput v-model:value="pcsForm.remark" class="cn-input" type="textarea" :rows="2" />
+              <NInput v-model:value="pcsForm.remark" type="textarea" :rows="2" />
             </NFormItem>
           </NForm>
           <div class="flex justify-end gap-8px">
-            <NButton class="cn-btn cn-btn-ghost" size="small">取消</NButton>
-            <NButton class="cn-btn cn-btn-warning" type="warning" size="small">试下发</NButton>
-            <NButton class="cn-btn cn-btn-success" type="success" size="small">确认下发</NButton>
+            <NButton type="default" size="small">取消</NButton>
+            <NButton type="warning" size="small">试下发</NButton>
+            <NButton type="success" size="small">确认下发</NButton>
           </div>
         </NCard>
       </NGi>
     </NGrid>
 
     <!-- 实时告警滚动列表 -->
-    <NCard :bordered="false" class="cn-card card-wrapper">
-      <div class="cn-section-title mb-12px">实时告警 / 通信日志（滚动区域）</div>
-      <p class="cn-text-sm mb-12px">class="cn-scrollbar" 适用于告警流、设备心跳、操作审计等长列表</p>
-      <div class="cn-industrial-panel cn-scrollbar h-280px">
+    <NCard :bordered="false" class="card-wrapper">
+      <div class="text-cn-md font-600 mb-12px">实时告警 / 通信日志（滚动区域）</div>
+      <p class="text-cn-sm text-cn-text-hint mb-12px">class="cn-scrollbar" 适用于告警流、设备心跳、操作审计等长列表</p>
+      <div class="rd-cn-md bg-cn-bg border border-cn-border cn-scrollbar h-280px">
         <div
           v-for="item in alarmLogs"
           :key="item.id"
@@ -460,10 +475,10 @@ function handleSubmitTicket() {
             {{ alarmLevelTag[item.level].label }}
           </NTag>
           <div class="flex-1 min-w-0">
-            <div class="cn-text-base font-mono">{{ item.device }}</div>
-            <div class="cn-text-sm mt-2px">{{ item.message }}</div>
+            <div class="text-cn-base text-cn-text-primary font-mono">{{ item.device }}</div>
+            <div class="text-cn-sm text-cn-text-hint mt-2px">{{ item.message }}</div>
           </div>
-          <span class="cn-text-sm font-mono shrink-0">{{ item.time }}</span>
+          <span class="text-cn-sm font-mono shrink-0">{{ item.time }}</span>
         </div>
       </div>
     </NCard>

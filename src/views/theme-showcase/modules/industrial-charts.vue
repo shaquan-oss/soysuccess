@@ -20,22 +20,22 @@ const { domRef: pieRef } = useEcharts(createAlarmPieChartOption);
 <template>
   <NGrid cols="1 m:2" :x-gap="16" :y-gap="16" responsive="screen">
     <NGi>
-      <NCard title="SOC 24h 趋势" :bordered="false" class="cn-card card-wrapper" size="small">
+      <NCard title="SOC 24h 趋势" :bordered="false" class="card-wrapper" size="small">
         <div ref="socRef" class="h-280px" />
       </NCard>
     </NGi>
     <NGi>
-      <NCard title="产线周产量" :bordered="false" class="cn-card card-wrapper" size="small">
+      <NCard title="产线周产量" :bordered="false" class="card-wrapper" size="small">
         <div ref="barRef" class="h-280px" />
       </NCard>
     </NGi>
     <NGi>
-      <NCard title="设备在线率" :bordered="false" class="cn-card card-wrapper" size="small">
+      <NCard title="设备在线率" :bordered="false" class="card-wrapper" size="small">
         <div ref="gaugeRef" class="h-280px" />
       </NCard>
     </NGi>
     <NGi>
-      <NCard title="告警类型分布" :bordered="false" class="cn-card card-wrapper" size="small">
+      <NCard title="告警类型分布" :bordered="false" class="card-wrapper" size="small">
         <div ref="pieRef" class="h-280px" />
       </NCard>
     </NGi>

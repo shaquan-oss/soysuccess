@@ -584,33 +584,11 @@ declare namespace App {
           progress: string;
           modal: string;
           table: string;
-          pageLayout: {
-            pageHeader: string;
-            pageHeaderHint: string;
-            toolbar: string;
-            toolbarHint: string;
-            statRow: string;
-            statRowHint: string;
-            kvGrid: string;
-            kvGridHint: string;
-            statusDot: string;
-            statusDotHint: string;
-            sectionTitle: string;
-            sectionTitleHint: string;
-            chartWrap: string;
-            chartWrapHint: string;
-            empty: string;
-            emptyHint: string;
-            fullPage: string;
-            fullPageHint: string;
-          };
           industrial: {
             charts: string;
             chartsHint: string;
             scrollbar: string;
             scrollbarHint: string;
-            monitor: string;
-            monitorHint: string;
           };
           ems: {
             title: string;
@@ -622,7 +600,6 @@ declare namespace App {
             tags: string;
             feedback: string;
             layout: string;
-            pageLayout: string;
             industrial: string;
             ems: string;
           };

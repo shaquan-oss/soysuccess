@@ -72,19 +72,19 @@ export const showcaseRadiusSpec = [
     label: '大模块圆角',
     px: chunengDesignTokens.radius.lg,
     usage: '页面大区块、主容器',
-    shortcut: 'cn-rd-lg / cn-module-lg'
+    shortcut: 'rd-cn-lg / bg-cn-bg border-cn-border'
   },
   {
     label: '小模块 / 弹窗 / 下拉 / 大切换',
     px: chunengDesignTokens.radius.md,
     usage: 'Card、Modal、Dropdown、Switch(medium+)',
-    shortcut: 'cn-rd-md'
+    shortcut: 'rd-cn-md'
   },
   {
     label: '按钮 / 标签 / 小切换',
     px: chunengDesignTokens.radius.sm,
     usage: 'Button、Tag、Input、Switch(small)',
-    shortcut: 'cn-rd-sm'
+    shortcut: 'rd-cn-sm'
   }
 ] as const;
 
@@ -92,28 +92,6 @@ export const showcaseButtonHeightSpec = [
   { size: 'small' as const, px: chunengDesignTokens.buttonHeight.small, desc: '表格内或空间紧凑的行级操作' },
   { size: 'medium' as const, px: chunengDesignTokens.buttonHeight.medium, desc: '主流页面级操作按钮（默认）' },
   { size: 'large' as const, px: chunengDesignTokens.buttonHeight.large, desc: '重点主操作或强调区域' }
-];
-
-export const showcaseStatMetrics = [
-  { label: '今日产量', value: '12,580', unit: 'PCS', trend: '+8.2%' },
-  { label: '设备在线率', value: '96.4', unit: '%', trend: '+0.3%' },
-  { label: '告警数', value: '3', unit: '条', trend: '-2' },
-  { label: '平均 SOC', value: '78.6', unit: '%', trend: '稳定' }
-];
-
-export const showcaseDeviceParams = [
-  { label: 'SOC', value: '87.2%' },
-  { label: 'SOH', value: '98.1%' },
-  { label: '电压', value: '3.65 V' },
-  { label: '电流', value: '12.3 A' },
-  { label: '温度', value: '32.5 ℃' },
-  { label: '循环次数', value: '1,024' }
-];
-
-export const showcaseStatusDotExamples = [
-  { class: 'cn-status-dot cn-status-dot-running', label: '运行中', desc: 'cn-status-dot-running' },
-  { class: 'cn-status-dot cn-status-dot-alarm', label: '告警', desc: 'cn-status-dot-alarm' },
-  { class: 'cn-status-dot cn-status-dot-offline', label: '离线', desc: 'cn-status-dot-offline' }
 ];
 
 export const showcaseScrollbarDemoItems = Array.from({ length: 24 }, (_, i) => ({
@@ -147,4 +125,4 @@ export const showcaseTableData: ShowcaseDeviceRow[] = [
 
 /** 代码片段提示框 class（展示用） */
 export const showcaseCodeHintClass =
-  'p-8px px-12px rd-4px bg-cn-bg border border-cn-border border-dashed font-mono cn-text-sm text-cn-text-hint break-all';
+  'p-8px px-12px rd-4px bg-cn-bg border border-cn-border border-dashed font-mono text-cn-sm text-cn-text-hint break-all';
