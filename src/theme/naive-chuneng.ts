@@ -5,8 +5,20 @@ const { color, fontSize, radius, buttonHeight } = chunengDesignTokens;
 const px = (n: number) => `${n}px`;
 
 /**
- * 楚能 UI · Naive UI 结构覆盖
- * 语义色与交互色由 getNaiveTheme 动态注入，此处仅保留尺寸、圆角、禁用态等静态结构
+ * 楚能 UI · Naive UI 结构覆盖（对照 UI 稿）
+ *
+ * 职责边界：
+ * - 本文件：尺寸、圆角、文字/边框/背景/禁用等静态 token（来自 design-tokens.ts）
+ * - getNaiveTheme：交互色（hover/pressed/聚焦/选中），随 themeColor 抽屉可切换
+ *
+ * | 组件 | UI 稿章节 | 本文件覆盖 |
+ * |------|----------|-----------|
+ * | common | 02 颜色/一般色 | 文字三级、边框、列表 hover、页面背景 |
+ * | Button | 02 高度/圆角/03 禁用 | 32/36/48、4px 圆角、灰底白字禁用 |
+ * | Input/Select | 05 文本框/下拉 | 同按钮高度、4px 圆角；边框色见 getNaiveTheme |
+ * | DataTable | 一般色 + 01 表头字 | 表头 bgPage、行 hover、6px 圆角 |
+ * | Dialog/Modal | 05 弹窗 | 6px 圆角、标题 16px |
+ * | Tabs/Checkbox/Switch | 05 切换/复选/开关 | 圆角；Switch 开/关色由主题 primary/error 驱动 |
  */
 export const chunengNaiveOverrides: GlobalThemeOverrides = {
   common: {

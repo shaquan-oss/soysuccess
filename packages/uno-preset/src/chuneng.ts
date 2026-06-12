@@ -4,15 +4,23 @@ import type { Preset } from '@unocss/core';
 import type { Theme } from '@unocss/preset-mini';
 
 /**
- * 楚能设计 Token（与 src/theme/design-tokens.ts 保持同步）
+ * 楚能 UnoCSS 预设 · 对照 UI 稿
  *
- * 用法原则（Naive UI 最佳实践）：
- * - 组件默认样式 → naive-chuneng.ts + getNaiveTheme 主题覆盖
- * - 开发直接用 <NButton type="primary">、<NInput> 等，无需 cn-btn/cn-input
- * - UnoCSS 仅提供：设计色板、字阶/圆角原子类、业务语义标签、滚动条工具类
+ * | UI 稿章节 | 本文件实现 | Naive 主题侧 |
+ * |-----------|-----------|-------------|
+ * | 品牌色拆解（蓝/绿阶） | chunengThemeColors.cn.blue/green | primary 随 themeColor 动态变化 |
+ * | 02 语义色/一般色 | cn.success/warning/error、cn.text、cn.border/bg | design-tokens + getNaiveTheme |
+ * | 01 字体 | text-cn-xl ~ text-cn-sm | — |
+ * | 02 圆角 | rd-cn-sm/md/lg | naive-chuneng.ts |
+ * | 04 图标尺寸 | icon-cn-menu/sm/xs | — |
+ * | 03 按钮/05 控件 | —（用 NButton type / 主题覆盖） | naive-chuneng + getNaiveTheme |
+ * | 设备状态标签 | cn-tag-* shortcuts | Tag type 无法还原浅色底，保留 shortcut |
+ *
+ * 色值须与 src/theme/design-tokens.ts 保持一致。
  */
 export const chunengThemeColors = {
   cn: {
+    /** UI 稿 · 品牌蓝色阶 100%→10% + hover/pressed */
     blue: {
       100: '#0028AA',
       hover: '#7A8FD2',
@@ -27,6 +35,7 @@ export const chunengThemeColors = {
       20: '#ccd4ee',
       10: '#e5e9f6'
     },
+    /** UI 稿 · 品牌绿色阶（能源/品牌语义，非功能 success 色） */
     green: {
       100: '#04ce19',
       90: '#1dd330',
@@ -53,6 +62,7 @@ export const chunengThemeColors = {
     hover: '#ECF1F7',
     disabled: '#BEC3C9',
     icon: '#E4E4E4',
+    /** UI 稿 · 图表辅配色 9 色 */
     chart: {
       1: '#0028AA',
       2: '#00BDFF',
@@ -68,6 +78,7 @@ export const chunengThemeColors = {
   }
 } as const;
 
+/** UI 稿 01 字体 · 原子类 text-cn-* */
 const chunengThemeExtend: Pick<Theme, 'fontSize' | 'borderRadius'> = {
   fontSize: {
     'cn-xl': ['24px', { lineHeight: '36px', fontWeight: '600' }],
@@ -76,6 +87,7 @@ const chunengThemeExtend: Pick<Theme, 'fontSize' | 'borderRadius'> = {
     'cn-base': ['14px', { lineHeight: '20px' }],
     'cn-sm': ['12px', { lineHeight: '18px' }]
   },
+  /** UI 稿 02 圆角 · 原子类 rd-cn-* */
   borderRadius: {
     'cn-sm': '4px',
     'cn-md': '6px',
@@ -83,16 +95,18 @@ const chunengThemeExtend: Pick<Theme, 'fontSize' | 'borderRadius'> = {
   }
 };
 
-/** 仅保留 Naive 主题无法表达的业务语义 */
+/** 业务语义：Naive Tag type 无法精确还原设计稿浅色底标签 */
 const chunengShortcuts: Record<string, string> = {
   'cn-tag-running': 'text-cn-sm font-600 !bg-success/12 !border !border-success/35 !text-success',
   'cn-tag-charging': 'text-cn-sm font-600 !bg-primary/10 !border !border-primary/30 !text-primary',
   'cn-tag-alarm': 'text-cn-sm font-600 !bg-error/10 !border !border-error/35 !text-error',
   'cn-tag-offline': 'text-cn-sm font-600 !bg-cn-hover !border !border-cn-border !text-cn-text-hint',
+  /** UI 稿 · 细滚动条，列表/日志区 */
   'cn-scrollbar':
     'overflow-auto [scrollbar-width:thin] [scrollbar-color:#DEE2EE_transparent] [&::-webkit-scrollbar]:w-6px [&::-webkit-scrollbar]:h-6px [&::-webkit-scrollbar-thumb]:rd-3px [&::-webkit-scrollbar-thumb]:bg-cn-border hover:[&::-webkit-scrollbar-thumb]:bg-primary-400 [&::-webkit-scrollbar-track]:bg-transparent'
 };
 
+/** UI 稿 04 图标 · 24 / 20 / 16px（线宽由 SVG 组件控制） */
 const chunengRules: Preset<Theme>['rules'] = [
   ['icon-cn-menu', { width: '24px', height: '24px', flexShrink: '0' }],
   ['icon-cn-sm', { width: '20px', height: '20px', flexShrink: '0' }],

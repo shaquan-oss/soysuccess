@@ -237,11 +237,17 @@ function getNaiveThemeColors(colors: App.Theme.ThemeColor, recommended = false) 
 }
 
 /**
- * Get naive theme
+ * 构建 Naive UI 运行时主题（对照 UI 稿 03 按钮 / 05 控件）
  *
- * @param colors Theme colors
- * @param settings Theme settings object
- * @param overrides Optional manual overrides from preset
+ * 与 naive-chuneng.ts 分工：
+ * - naive-chuneng：静态结构与尺寸（design-tokens）
+ * - 本函数：动态语义色 + 交互态（primary/success/error 等来自 themeSettings）
+ *
+ * UI 稿映射：
+ * - Button primary/default/tertiary → 03 按钮（主色/hover/pressed、取消灰框、描边新增）
+ * - Input/Select → 05 文本框/下拉（灰框默认、聚焦主色、错误红框）
+ * - Pagination → 05 翻页（当前页主色描边白底）
+ * - Dialog/Card → 05 弹窗标题主色
  */
 export function getNaiveTheme(
   colors: App.Theme.ThemeColor,
