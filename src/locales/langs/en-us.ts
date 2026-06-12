@@ -311,56 +311,6 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean just wrote some of the workbench pages casually, and it was enough to see!'
       },
       creativity: 'Creativity'
-    },
-    themeShowcase: {
-      title: 'Cornex ChuNeng Design System',
-      subtitle: 'Energy Management System · Brand colors & cn-* UnoCSS component styles',
-      semanticColors: 'Semantic Colors (dynamic with theme)',
-      blueScale: 'ChuNeng Blue · Color Scale',
-      greenScale: 'ChuNeng Green · Color Scale',
-      auxColors: 'Interaction & Layout Colors',
-      textColors: 'Text Colors',
-      typography: 'Typography Scale',
-      chartColors: 'Chart Palette',
-      generalColors: 'General UI Colors',
-      controls: {
-        radius: 'Border Radius',
-        radiusHint: '3 levels: large module 10px · modal/card 6px · button/tag 4px (Naive theme + rd-cn-* utilities)',
-        buttonHeight: 'Button Height',
-        buttonHeightHint: 'Small 32px · Medium 36px (default) · Large 48px — applied via naive-chuneng global overrides'
-      },
-      buttonVariants: 'Button Styles',
-      buttonHint:
-        'Use Naive UI components directly: type="primary" / type="default" / tertiary — theme handles styling',
-      deviceStatusTags: 'Device Status Tags (Battery Industry)',
-      tagHint: 'For BMS / PCS / production line device status',
-      alerts: 'Alert',
-      inputs: 'Input / Select',
-      formHint: 'Focus and selected states use primary blue #0028AA; dropdown active item is blue with white text',
-      pagination: 'Pagination',
-      checkboxSwitch: 'Checkbox / Switch',
-      progress: 'Progress / Badge',
-      modal: 'Modal / Dialog',
-      table: 'DataTable',
-      industrial: {
-        charts: 'Industrial Charts (ECharts)',
-        chartsHint: 'Design palette for SOC trend, production, online rate, alarm distribution',
-        scrollbar: 'Industrial Scrollbar cn-scrollbar',
-        scrollbarHint: 'Thin scrollbar with brand-blue hover for scrollable lists'
-      },
-      ems: {
-        title: 'EMS Business Scenarios',
-        hint: 'Typical EMS pages: station monitoring, alarm tickets, parameter dispatch via Naive UI + cn-*'
-      },
-      tabs: {
-        colors: 'Colors',
-        buttons: 'Buttons',
-        tags: 'Tags',
-        feedback: 'Feedback',
-        layout: 'Cards & Modal',
-        industrial: 'Industrial Charts',
-        ems: 'EMS Business'
-      }
     }
   },
   form: {

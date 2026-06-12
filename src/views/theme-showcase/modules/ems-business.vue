@@ -304,24 +304,16 @@ function handleSubmitTicket() {
 
 <template>
   <NSpace vertical :size="16">
-    <!-- 色值对照（EMS 业务常用） -->
     <NCard :bordered="false" class="card-wrapper">
-      <div class="text-cn-md font-600 mb-12px">EMS 语义色对照（设计稿 v2）</div>
       <div class="grid grid-cols-2 s:grid-cols-3 l:grid-cols-6 gap-12px">
-        <div v-for="item in colorAudit" :key="item.shortcut" class="rd-cn-md bg-cn-bg border border-cn-border p-12px">
+        <div v-for="item in colorAudit" :key="item.hex" class="rd-cn-md bg-cn-bg border border-cn-border p-12px">
           <div class="size-28px rd-4px mb-8px border border-cn-border" :style="{ backgroundColor: item.hex }" />
-          <div class="text-cn-sm font-600">{{ item.scene }}</div>
-          <div class="font-mono text-10px text-cn-text-hint mt-4px">{{ item.hex }}</div>
-          <div class="font-mono text-10px text-cn-text-hint">{{ item.shortcut }}</div>
+          <div class="text-cn-sm font-mono">{{ item.hex }}</div>
         </div>
       </div>
     </NCard>
 
-    <!-- 储能站设备监测表 -->
     <NCard :bordered="false" class="card-wrapper">
-      <div class="text-cn-md font-600 mb-12px">储能站设备监测表</div>
-      <p class="text-cn-sm text-cn-text-hint mb-12px">典型 EMS 列表页：筛选栏 + 分页，状态列使用 cn-tag-* 语义标签</p>
-
       <div class="flex flex-wrap items-center gap-12px p-12px rd-cn-md bg-container border border-cn-border mb-12px">
         <NInput v-model:value="keyword" class="w-180px" placeholder="设备编号 / 类型" size="small" clearable />
         <NSelect
@@ -369,11 +361,8 @@ function handleSubmitTicket() {
     </NCard>
 
     <NGrid cols="1 l:2" :x-gap="16" :y-gap="16" responsive="screen">
-      <!-- 告警工单表单 -->
       <NGi>
         <NCard :bordered="false" class="card-wrapper">
-          <div class="text-cn-md font-600 mb-12px">告警工单处置表单</div>
-          <p class="text-cn-sm text-cn-text-hint mb-16px">告警闭环：工单信息 + 处置人 + 方案说明</p>
           <NForm ref="formRef" :model="ticketForm" :rules="ticketRules" label-placement="top" size="small">
             <NGrid cols="2" :x-gap="16" :y-gap="0">
               <NFormItemGi span="2" label="工单标题">
@@ -420,11 +409,8 @@ function handleSubmitTicket() {
         </NCard>
       </NGi>
 
-      <!-- PCS 参数配置 -->
       <NGi>
         <NCard :bordered="false" class="card-wrapper">
-          <div class="text-cn-md font-600 mb-12px">PCS 运行参数配置</div>
-          <p class="text-cn-sm text-cn-text-hint mb-16px">EMS 策略下发：数值输入 + 开关 + 只读监测项</p>
           <NForm :model="pcsForm" label-placement="left" label-width="120" size="small">
             <NFormItem label="额定功率 (kW)">
               <NInputNumber v-model:value="pcsForm.ratedPower" class="w-full" :min="0" :step="100" />
@@ -461,10 +447,7 @@ function handleSubmitTicket() {
       </NGi>
     </NGrid>
 
-    <!-- 实时告警滚动列表 -->
     <NCard :bordered="false" class="card-wrapper">
-      <div class="text-cn-md font-600 mb-12px">实时告警 / 通信日志（滚动区域）</div>
-      <p class="text-cn-sm text-cn-text-hint mb-12px">class="cn-scrollbar" 适用于告警流、设备心跳、操作审计等长列表</p>
       <div class="rd-cn-md bg-cn-bg border border-cn-border cn-scrollbar h-280px">
         <div
           v-for="item in alarmLogs"

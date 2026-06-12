@@ -307,56 +307,6 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean 刚才把工作台页面随便写了一些，凑合能看了！'
       },
       creativity: '创意'
-    },
-    themeShowcase: {
-      title: '楚能 Cornex 设计系统',
-      subtitle: '能源管理系统 · UI 设计稿 v2 配色 / 字体 / 图表 / cn-* 组件展示',
-      semanticColors: '语义色（跟随主题动态变化）',
-      blueScale: '楚能蓝 · 标准色阶',
-      greenScale: '楚能绿 · 标准色阶',
-      auxColors: '交互与布局色',
-      textColors: '文字色阶',
-      typography: '字体层级',
-      chartColors: '图表辅配色',
-      generalColors: '一般 UI 色',
-      controls: {
-        radius: '圆角规范',
-        radiusHint: '三级圆角：大模块 10px · 小模块/弹窗 6px · 按钮/标签 4px（Naive 主题 + rd-cn-* 原子类）',
-        buttonHeight: '按钮高度',
-        buttonHeightHint:
-          'Small 32px（表格行内）· Medium 36px（默认）· Large 48px（重点主操作），由 naive-chuneng 全局覆盖'
-      },
-      buttonVariants: '按钮样式',
-      buttonHint: '直接使用 Naive UI 组件即可：type="primary" / type="default" / tertiary，样式由主题全局覆盖',
-      deviceStatusTags: '设备状态标签（电芯行业语义）',
-      tagHint: '适用于 BMS / PCS / 产线设备状态展示',
-      alerts: '提示 Alert',
-      inputs: '输入 Input / Select',
-      formHint: '聚焦/选中态使用主题蓝 #0028AA，下拉选中项蓝底白字，弹窗确定按钮同主色',
-      pagination: '翻页 Pagination',
-      checkboxSwitch: '复选框 / 开关',
-      progress: '进度 Progress / Badge',
-      modal: '弹窗 Modal / Dialog',
-      table: '表格 DataTable',
-      industrial: {
-        charts: '工业图表（ECharts）',
-        chartsHint: '使用设计稿辅配色，适用于 SOC 趋势、产量、在线率、告警分布',
-        scrollbar: '工业风滚动条 cn-scrollbar',
-        scrollbarHint: '细滚动条 + 悬停变品牌蓝，列表区域可滚动浏览设备'
-      },
-      ems: {
-        title: 'EMS 能源管理业务场景',
-        hint: '基于 Naive UI + cn-* 的储能站监测、告警处置、参数下发等典型页面组件'
-      },
-      tabs: {
-        colors: '品牌配色',
-        buttons: '按钮',
-        tags: '标签',
-        feedback: '表单反馈',
-        layout: '卡片弹窗',
-        industrial: '工业图表',
-        ems: 'EMS 业务'
-      }
     }
   },
   form: {
