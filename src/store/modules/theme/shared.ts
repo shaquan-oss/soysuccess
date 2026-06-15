@@ -206,12 +206,6 @@ interface NaiveColorAction {
   handler: (color: string) => string;
 }
 
-/**
- * Get naive theme colors
- *
- * @param colors Theme colors
- * @param [recommended=false] Use recommended color. Default is `false`
- */
 function getNaiveThemeColors(colors: App.Theme.ThemeColor, recommended = false) {
   const colorActions: NaiveColorAction[] = [
     { scene: '', handler: color => color },
@@ -236,19 +230,6 @@ function getNaiveThemeColors(colors: App.Theme.ThemeColor, recommended = false) 
   return themeColors;
 }
 
-/**
- * 构建 Naive UI 运行时主题（对照 UI 稿 03 按钮 / 05 控件）
- *
- * 与 naive-chuneng.ts 分工：
- * - naive-chuneng：静态结构与尺寸（design-tokens）
- * - 本函数：动态语义色 + 交互态（primary/success/error 等来自 themeSettings）
- *
- * UI 稿映射：
- * - Button primary/default/tertiary → 03 按钮（主色/hover/pressed、取消灰框、描边新增）
- * - Input/Select → 05 文本框/下拉（灰框默认、聚焦主色、错误红框）
- * - Pagination → 05 翻页（当前页主色描边白底）
- * - Dialog/Card → 05 弹窗标题主色
- */
 export function getNaiveTheme(
   colors: App.Theme.ThemeColor,
   settings: App.Theme.ThemeSetting,
@@ -274,7 +255,6 @@ export function getNaiveTheme(
     Tag: {
       borderRadius: `${settings.themeRadius}px`
     },
-    /** 设计稿按钮：主色 hover/pressed；默认按钮按下变主色实心 */
     Button: {
       colorHoverPrimary: primaryHover,
       colorPressedPrimary: primaryPressed,
@@ -300,7 +280,6 @@ export function getNaiveTheme(
       titleTextColor: colors.primary,
       titleFontWeight: '600'
     },
-    /** 设计稿：默认灰框 / 输入中主色边框 / 错误红框红字 */
     Input: {
       border: cnBorder(cnColor.border),
       borderHover: cnBorder(primaryHover),
@@ -312,7 +291,6 @@ export function getNaiveTheme(
       colorError: '#FFFFFF',
       textColorError: colors.error
     },
-    /** 设计稿：已选主色边框；下拉项悬停/选中实心主色底白字 */
     Select: {
       peers: {
         InternalSelection: {
@@ -337,7 +315,6 @@ export function getNaiveTheme(
       titleTextColor: colors.primary,
       titleFontWeight: '600'
     },
-    /** 设计稿：当前页主色描边 + 白底 + 主色数字 */
     Pagination: {
       itemBorder: cnBorder(cnColor.border),
       buttonBorder: cnBorder(cnColor.border),
@@ -353,7 +330,5 @@ export function getNaiveTheme(
     }
   };
 
-  // If there are overrides, merge them with priority
-  // overrides has higher priority than auto-generated theme
   return overrides ? defu(overrides, theme) : theme;
 }

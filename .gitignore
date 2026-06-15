@@ -34,3 +34,6 @@ yarn.lock
 
 .VSCodeCounter
 src-tauri/target
+
+# Local docs site (not part of main repo)
+cornex-ui-docs/

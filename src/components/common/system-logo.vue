@@ -170,8 +170,7 @@ withDefaults(defineProps<Props>(), {
     <img src="/cornex-logo.png" alt="Cornex 楚能" class="logo-img" />
     -->
 
-    <img v-if="!compact" src="/cornex-logo.png" alt="Cornex 楚能" class="logo-img logo-img--full" />
-    <img v-else src="/cornex-logo-icon.svg" alt="Cornex" class="logo-img logo-img--icon" />
+    <img src="/icon1.png" alt="Cornex 楚能" class="logo-img" :class="compact ? 'logo-img--icon' : 'logo-img--full'" />
 
     <!--
  仅 icon（侧栏展开时显示过小，已改为横版 Logo）

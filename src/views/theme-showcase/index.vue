@@ -20,6 +20,7 @@ import {
 } from './showcase-data';
 import IndustrialCharts from './modules/industrial-charts.vue';
 import EmsBusinessShowcase from './modules/ems-business.vue';
+import FeedbackStatesShowcase from './modules/feedback-states.vue';
 import { useThemeStore } from '@/store/modules/theme';
 
 defineOptions({
@@ -289,6 +290,9 @@ const semanticColors = [
             </NGi>
           </NGrid>
         </NSpace>
+
+        <!-- 状态：Loading / Empty / Overlay -->
+        <FeedbackStatesShowcase v-else-if="tab.name === 'states'" />
 
         <!-- 布局 -->
         <NSpace v-else-if="tab.name === 'layout'" vertical :size="16">

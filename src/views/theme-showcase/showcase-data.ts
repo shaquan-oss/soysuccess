@@ -14,6 +14,7 @@ export const showcaseTabs = [
   { name: 'buttons', label: '按钮' },
   { name: 'tags', label: '标签' },
   { name: 'feedback', label: '表单' },
+  { name: 'states', label: '状态' },
   { name: 'layout', label: '布局' },
   { name: 'industrial', label: '图表' },
   { name: 'ems', label: 'EMS' }

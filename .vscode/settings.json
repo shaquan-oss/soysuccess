@@ -1,8 +1,5 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.oxc": "explicit"
-  },
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit", "source.fixAll.oxc": "explicit" },
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "eslint.validate": ["vue"],
@@ -19,5 +16,6 @@
     "baseUrl": "."
   },
   "oxc.fmt.configPath": ".oxfmtrc.json",
-  "unocss.root": ["./"]
+  "unocss.root": ["./"],
+  "extensions.allowed": { "*": true, "MarsCode.marscode-extension": true, "Alibaba-Cloud.tongyi-lingma": true }
 }

@@ -1,0 +1,182 @@
+{
+  "common": {
+    "primaryColor": "#0028AA",
+    "primaryColorSuppl": "#0028AA",
+    "primaryColorHover": "#7A8FD2",
+    "primaryColorPressed": "#4D69C4",
+    "primaryColorActive": "#0028aa1a",
+    "infoColor": "#0028AA",
+    "infoColorSuppl": "#0028AA",
+    "infoColorHover": "#0028aa",
+    "infoColorPressed": "#00105e",
+    "infoColorActive": "#0028aa1a",
+    "successColor": "#2CCFDC",
+    "successColorSuppl": "#2CCFDC",
+    "successColorHover": "#2ccfdc",
+    "successColorPressed": "#0e7e8f",
+    "successColorActive": "#2ccfdc1a",
+    "warningColor": "#F4BB4A",
+    "warningColorSuppl": "#F4BB4A",
+    "warningColorHover": "#f4bb4a",
+    "warningColorPressed": "#a87222",
+    "warningColorActive": "#f4bb4a1a",
+    "errorColor": "#F76359",
+    "errorColorSuppl": "#F76359",
+    "errorColorHover": "#f76359",
+    "errorColorPressed": "#ab2c2c",
+    "errorColorActive": "#f763591a",
+    "borderRadius": "4px",
+    "borderRadiusSmall": "4px",
+    "fontWeightStrong": "600",
+    "lineHeight": "1.43",
+    "textColor1": "#02010F",
+    "textColor2": "#434343",
+    "textColor3": "#656565",
+    "borderColor": "#DEE2EE",
+    "dividerColor": "#DEE2EE",
+    "hoverColor": "#ECF1F7",
+    "bodyColor": "#F6F9FE"
+  },
+  "LoadingBar": {
+    "colorLoading": "#0028AA"
+  },
+  "Tag": {
+    "borderRadius": "6px"
+  },
+  "Button": {
+    "colorHoverPrimary": "#7A8FD2",
+    "colorPressedPrimary": "#4D69C4",
+    "color": "#FFFFFF",
+    "colorHover": "#FFFFFF",
+    "colorPressed": "#0028AA",
+    "textColor": "#434343",
+    "textColorHover": "#434343",
+    "textColorPressed": "#FFFFFF",
+    "border": "1px solid #DEE2EE",
+    "borderHover": "1px solid #DEE2EE",
+    "borderPressed": "1px solid #0028AA",
+    "colorTertiary": "#FFFFFF",
+    "colorHoverTertiary": "#FFFFFF",
+    "textColorTertiary": "#0028AA",
+    "textColorHoverTertiary": "#7A8FD2",
+    "textColorPressedTertiary": "#4D69C4",
+    "borderTertiary": "1px solid #0028AA",
+    "borderHoverTertiary": "1px solid #7A8FD2",
+    "borderPressedTertiary": "1px solid #4D69C4",
+    "borderRadiusMedium": "4px",
+    "borderRadiusSmall": "4px",
+    "borderRadiusLarge": "4px",
+    "fontWeightStrong": "600",
+    "heightMedium": "36px",
+    "heightSmall": "32px",
+    "heightLarge": "48px",
+    "paddingMedium": "0 16px",
+    "paddingSmall": "0 12px",
+    "paddingLarge": "0 20px",
+    "fontSizeMedium": "14px",
+    "textColorPrimary": "#FFFFFF",
+    "textColorHoverPrimary": "#FFFFFF",
+    "textColorPressedPrimary": "#FFFFFF",
+    "textColorFocusPrimary": "#FFFFFF",
+    "colorDisabled": "#BEC3C9",
+    "colorDisabledPrimary": "#BEC3C9",
+    "textColorDisabled": "#FFFFFF",
+    "textColorDisabledPrimary": "#FFFFFF",
+    "borderDisabled": "1px solid transparent",
+    "borderDisabledPrimary": "1px solid transparent",
+    "opacityDisabled": "1"
+  },
+  "Card": {
+    "titleTextColor": "#0028AA",
+    "titleFontWeight": "600"
+  },
+  "Input": {
+    "border": "1px solid #DEE2EE",
+    "borderHover": "1px solid #7A8FD2",
+    "borderFocus": "1px solid #0028AA",
+    "borderError": "1px solid #F76359",
+    "boxShadowFocus": "0 0 0 2px #0028aa1f",
+    "caretColor": "#0028AA",
+    "colorFocus": "#FFFFFF",
+    "colorError": "#FFFFFF",
+    "textColorError": "#F76359",
+    "borderRadius": "4px",
+    "heightMedium": "36px",
+    "heightSmall": "32px",
+    "heightLarge": "48px",
+    "fontSizeMedium": "14px"
+  },
+  "Select": {
+    "peers": {
+      "InternalSelection": {
+        "border": "1px solid #DEE2EE",
+        "borderHover": "1px solid #7A8FD2",
+        "borderActive": "1px solid #0028AA",
+        "borderFocus": "1px solid #0028AA",
+        "boxShadowFocus": "0 0 0 2px #0028aa1f",
+        "caretColor": "#0028AA",
+        "borderRadius": "4px",
+        "heightMedium": "36px",
+        "heightSmall": "32px",
+        "heightLarge": "48px",
+        "fontSizeMedium": "14px"
+      },
+      "InternalSelectMenu": {
+        "optionColorActive": "#0028AA",
+        "optionTextColorActive": "#FFFFFF",
+        "optionColorActivePending": "#7A8FD2",
+        "optionColorPending": "#0028AA",
+        "optionTextColorPressed": "#FFFFFF",
+        "optionCheckColor": "#FFFFFF",
+        "borderRadius": "6px"
+      }
+    },
+    "borderRadius": "4px"
+  },
+  "Dialog": {
+    "titleTextColor": "#0028AA",
+    "titleFontWeight": "600",
+    "borderRadius": "6px",
+    "padding": "20px 24px",
+    "titleFontSize": "16px"
+  },
+  "Pagination": {
+    "itemBorder": "1px solid #DEE2EE",
+    "buttonBorder": "1px solid #DEE2EE",
+    "itemColor": "#FFFFFF",
+    "itemColorHover": "#F6F9FE",
+    "itemTextColor": "#02010F",
+    "itemColorActive": "#FFFFFF",
+    "itemTextColorActive": "#0028AA",
+    "itemBorderActive": "1px solid #0028AA",
+    "itemColorActiveHover": "#FFFFFF",
+    "itemTextColorHover": "#0028AA",
+    "itemBorderRadius": "4px"
+  },
+  "DataTable": {
+    "borderRadius": "6px",
+    "thFontWeight": "600",
+    "thPaddingMedium": "12px 16px",
+    "tdPaddingMedium": "12px 16px",
+    "thColor": "#F6F9FE",
+    "thTextColor": "#434343",
+    "tdColorHover": "#ECF1F7",
+    "borderColor": "#DEE2EE",
+    "fontSizeMedium": "14px"
+  },
+  "Tabs": {
+    "tabFontWeightActive": "600",
+    "tabFontSizeMedium": "14px"
+  },
+  "Modal": {
+    "borderRadius": "6px"
+  },
+  "Checkbox": {
+    "borderRadius": "4px",
+    "checkMarkColor": "#FFFFFF"
+  },
+  "Switch": {
+    "railBorderRadiusSmall": "4px",
+    "railBorderRadiusMedium": "6px"
+  }
+}
