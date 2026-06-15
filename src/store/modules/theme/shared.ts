@@ -4,21 +4,14 @@ import { addColorAlpha, getColorPalette, getPaletteColorByNumber, getRgb } from 
 import { DARK_CLASS } from '@/constants/app';
 import { toggleHtmlClass } from '@/utils/common';
 import { localStg } from '@/utils/storage';
-import { chunengDesignTokens } from '@/theme/design-tokens';
 import { overrideThemeSettings, themeSettings } from '@/theme/settings';
 import { themeVars } from '@/theme/vars';
-
-const cnBorder = (color: string) => `1px solid ${color}`;
 
 /** Init theme settings */
 export function initThemeSettings() {
   const isProd = import.meta.env.PROD;
 
-  // if it is development mode, the theme settings will not be cached, by update `themeSettings` in `src/theme/settings.ts` to update theme settings
   if (!isProd) return themeSettings;
-
-  // if it is production mode, the theme settings will be cached in localStorage
-  // if want to update theme settings when publish new version, please update `overrideThemeSettings` in `src/theme/settings.ts`
 
   const localSettings = localStg.get('themeSettings');
 
@@ -230,6 +223,14 @@ function getNaiveThemeColors(colors: App.Theme.ThemeColor, recommended = false) 
   return themeColors;
 }
 
+/**
+ * 生成随主题色动态变化的 Naive UI 覆盖项
+ *
+ * 职责：仅包含依赖运行时 colors 对象的交互色 token。
+ * 静态尺寸/圆角/禁用态见 naive-chuneng.ts。
+ *
+ * 合并规则：defu(chunengNaiveOverrides, theme) — chunengNaiveOverrides 优先级更高。
+ */
 export function getNaiveTheme(
   colors: App.Theme.ThemeColor,
   settings: App.Theme.ThemeSetting,
@@ -237,96 +238,27 @@ export function getNaiveTheme(
 ) {
   const { primary: colorLoading } = colors;
   const recommend = settings.recommendColor;
-  const { color: cnColor, radius } = chunengDesignTokens;
-  const primaryHover = recommend ? getPaletteColorByNumber(colors.primary, 400, true) : cnColor.primaryHover;
-  const primaryPressed = recommend ? getPaletteColorByNumber(colors.primary, 600, true) : cnColor.primaryPressed;
-  const primaryFocusRing = `0 0 0 2px ${addColorAlpha(colors.primary, 0.12)}`;
+
+  // 按钮交互背景（UI 稿规则：hover = 主色 50% 透明度，pressed = 主色 70% 透明度）
+  const btnHover = addColorAlpha(colors.primary, 0.5);
+  const btnPressed = addColorAlpha(colors.primary, 0.7);
 
   const theme: GlobalThemeOverrides = {
     common: {
+      // 各语义色及其 Hover/Pressed/Active 变体（由 getNaiveThemeColors 批量生成）
       ...getNaiveThemeColors(colors, recommend),
+
+      // 全局圆角跟随用户设置（themeRadius 滑块）
       borderRadius: `${settings.themeRadius}px`,
-      primaryColorHover: primaryHover,
-      primaryColorPressed: primaryPressed
+
+      // 覆盖 naive 默认的 primaryColorHover/Pressed，使按钮内部逻辑与 Button token 一致
+      primaryColorHover: btnHover,
+      primaryColorPressed: btnPressed
     },
+
     LoadingBar: {
+      // 顶部进度条颜色跟随主色
       colorLoading
-    },
-    Tag: {
-      borderRadius: `${settings.themeRadius}px`
-    },
-    Button: {
-      colorHoverPrimary: primaryHover,
-      colorPressedPrimary: primaryPressed,
-      color: '#FFFFFF',
-      colorHover: '#FFFFFF',
-      colorPressed: colors.primary,
-      textColor: cnColor.textSecondary,
-      textColorHover: cnColor.textSecondary,
-      textColorPressed: '#FFFFFF',
-      border: cnBorder(cnColor.border),
-      borderHover: cnBorder(cnColor.border),
-      borderPressed: cnBorder(colors.primary),
-      colorTertiary: '#FFFFFF',
-      colorHoverTertiary: '#FFFFFF',
-      textColorTertiary: colors.primary,
-      textColorHoverTertiary: primaryHover,
-      textColorPressedTertiary: primaryPressed,
-      borderTertiary: cnBorder(colors.primary),
-      borderHoverTertiary: cnBorder(primaryHover),
-      borderPressedTertiary: cnBorder(primaryPressed)
-    },
-    Card: {
-      titleTextColor: colors.primary,
-      titleFontWeight: '600'
-    },
-    Input: {
-      border: cnBorder(cnColor.border),
-      borderHover: cnBorder(primaryHover),
-      borderFocus: cnBorder(colors.primary),
-      borderError: cnBorder(colors.error),
-      boxShadowFocus: primaryFocusRing,
-      caretColor: colors.primary,
-      colorFocus: '#FFFFFF',
-      colorError: '#FFFFFF',
-      textColorError: colors.error
-    },
-    Select: {
-      peers: {
-        InternalSelection: {
-          border: cnBorder(cnColor.border),
-          borderHover: cnBorder(primaryHover),
-          borderActive: cnBorder(colors.primary),
-          borderFocus: cnBorder(colors.primary),
-          boxShadowFocus: primaryFocusRing,
-          caretColor: colors.primary
-        },
-        InternalSelectMenu: {
-          optionColorActive: colors.primary,
-          optionTextColorActive: '#FFFFFF',
-          optionColorActivePending: primaryHover,
-          optionColorPending: colors.primary,
-          optionTextColorPressed: '#FFFFFF',
-          optionCheckColor: '#FFFFFF'
-        }
-      }
-    },
-    Dialog: {
-      titleTextColor: colors.primary,
-      titleFontWeight: '600'
-    },
-    Pagination: {
-      itemBorder: cnBorder(cnColor.border),
-      buttonBorder: cnBorder(cnColor.border),
-      itemColor: '#FFFFFF',
-      itemColorHover: cnColor.bgPage,
-      itemTextColor: cnColor.textPrimary,
-      itemColorActive: '#FFFFFF',
-      itemTextColorActive: colors.primary,
-      itemBorderActive: cnBorder(colors.primary),
-      itemColorActiveHover: '#FFFFFF',
-      itemTextColorHover: colors.primary,
-      itemBorderRadius: `${radius.sm}px`
     }
   };
 
